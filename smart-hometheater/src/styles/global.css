@@ -188,14 +188,8 @@ p {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: linear-gradient(135deg, var(--accent), #C99710);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #0E0E12;
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .brand-name-en {

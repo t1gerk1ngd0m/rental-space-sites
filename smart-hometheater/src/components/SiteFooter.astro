@@ -1,0 +1,42 @@
+---
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  brandSubtitle?: string;
+  homeHref?: string;
+  links?: FooterLink[];
+  copyright?: string;
+}
+
+const {
+  brandSubtitle = 'スマート ホームシアター',
+  homeHref = '/',
+  links = [],
+  copyright = '© Smart ホームシアター',
+} = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a href={homeHref} class="brand">
+        <span class="brand-mark">S</span>
+        <span>
+          <span class="brand-name-en">SMART HOMETHEATER</span><br />
+          <span class="brand-name-jp">{brandSubtitle}</span>
+        </span>
+      </a>
+      {links.length > 0 && (
+        <ul class="footer-nav">
+          {links.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      )}
+    </div>
+    <div class="copyright">{copyright}</div>
+  </div>
+</footer>
