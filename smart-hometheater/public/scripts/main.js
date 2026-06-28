@@ -15,7 +15,7 @@
     onScroll();
   }
 
-  // ===== Lightbox for gallery =====
+  // ===== Lightbox for gallery (vertical scroll through all photos) =====
   const galleryItems = Array.from(document.querySelectorAll('[data-gallery-item]'));
   if (galleryItems.length > 0) {
     const sources = galleryItems.map(el => ({
@@ -29,34 +29,61 @@
     lightbox.setAttribute('aria-modal', 'true');
     lightbox.innerHTML = `
       <button class="lightbox-close" aria-label="閉じる">✕</button>
-      <button class="lightbox-prev" aria-label="前の画像">‹</button>
-      <button class="lightbox-next" aria-label="次の画像">›</button>
-      <img alt="" />
       <div class="lightbox-counter"><span class="current">1</span> / <span class="total">${sources.length}</span></div>
+      <div class="lightbox-track"></div>
     `;
     document.body.appendChild(lightbox);
 
-    const imgEl = lightbox.querySelector('img');
+    const track = lightbox.querySelector('.lightbox-track');
     const currentEl = lightbox.querySelector('.current');
-    let idx = 0;
-
-    const show = i => {
-      idx = (i + sources.length) % sources.length;
-      imgEl.src = sources[idx].src;
-      imgEl.alt = sources[idx].alt;
-      currentEl.textContent = String(idx + 1);
-    };
-
-    const open = i => {
-      show(i);
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    };
+    const imgEls = sources.map(s => {
+      const img = document.createElement('img');
+      img.alt = s.alt;
+      img.loading = 'lazy';
+      img.src = s.src;
+      track.appendChild(img);
+      return img;
+    });
 
     const close = () => {
       lightbox.classList.remove('active');
       document.body.style.overflow = '';
     };
+
+    const open = i => {
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      // Jump (no animation) to the clicked photo once layout is ready
+      window.requestAnimationFrame(() => {
+        const target = imgEls[i];
+        if (target) lightbox.scrollTop = target.offsetTop - 16;
+        currentEl.textContent = String(i + 1);
+      });
+    };
+
+    // Counter: a reference line slides top→bottom as you scroll, so the very
+    // top reads 1 and the very bottom reads the last photo (where several end
+    // up visible at once and can no longer be scrolled to the top).
+    let ticking = false;
+    const updateCounter = () => {
+      const max = lightbox.scrollHeight - lightbox.clientHeight;
+      const frac = max > 0 ? lightbox.scrollTop / max : 0;
+      const anchor = lightbox.scrollTop + frac * (lightbox.clientHeight - 1);
+      let best = 0;
+      for (let i = 0; i < imgEls.length; i++) {
+        if (imgEls[i].offsetTop <= anchor) best = i;
+        else break;
+      }
+      currentEl.textContent = String(best + 1);
+    };
+    lightbox.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        updateCounter();
+        ticking = false;
+      });
+    }, { passive: true });
 
     galleryItems.forEach((el, i) => {
       el.setAttribute('role', 'button');
@@ -71,31 +98,35 @@
     });
 
     lightbox.querySelector('.lightbox-close').addEventListener('click', close);
-    lightbox.querySelector('.lightbox-prev').addEventListener('click', () => show(idx - 1));
-    lightbox.querySelector('.lightbox-next').addEventListener('click', () => show(idx + 1));
-    lightbox.addEventListener('click', e => {
-      if (e.target === lightbox) close();
-    });
 
     document.addEventListener('keydown', e => {
       if (!lightbox.classList.contains('active')) return;
       if (e.key === 'Escape') close();
-      if (e.key === 'ArrowLeft') show(idx - 1);
-      if (e.key === 'ArrowRight') show(idx + 1);
     });
+  }
 
-    // Touch swipe
-    let touchStartX = 0;
-    lightbox.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
+  // ===== Mobile gallery carousel counter =====
+  const galleryEl = document.querySelector('.gallery');
+  const counterCurrent = document.querySelector('[data-gallery-counter] .current');
+  if (galleryEl && counterCurrent) {
+    const items = galleryEl.querySelectorAll('.gallery-item');
+    const updateCounter = () => {
+      if (!items.length) return;
+      const step = items[0].getBoundingClientRect().width + 10; // slide width + gap
+      if (step <= 0) return;
+      const i = Math.round(galleryEl.scrollLeft / step);
+      counterCurrent.textContent = String(Math.min(Math.max(i + 1, 1), items.length));
+    };
+    let ticking = false;
+    galleryEl.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        updateCounter();
+        ticking = false;
+      });
     }, { passive: true });
-    lightbox.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].screenX - touchStartX;
-      if (Math.abs(dx) > 50) {
-        if (dx > 0) show(idx - 1);
-        else show(idx + 1);
-      }
-    }, { passive: true });
+    updateCounter();
   }
 
   // ===== Video placeholder click → load embed =====

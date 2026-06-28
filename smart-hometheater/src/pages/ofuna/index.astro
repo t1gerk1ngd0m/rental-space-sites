@@ -1,52 +1,101 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import LineButton from '../../components/LineButton.astro';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LineButton from "../../components/LineButton.astro";
 
 const navLinks = [
-  { label: '写真', href: '#gallery' },
-  { label: '料金', href: '#pricing' },
-  { label: 'アクセス', href: '#access' },
+  { label: "写真", href: "#gallery" },
+  { label: "料金", href: "#pricing" },
+  { label: "アクセス", href: "#access" },
 ];
 
 const footerLinks = [
-  { label: 'ブランドトップ', href: '/' },
-  { label: '横浜中華街店', href: '/motomachi/' },
-  { label: '料金', href: '#pricing' },
-  { label: 'アクセス', href: '#access' },
-  { label: 'LINEで予約', href: '#line-placeholder' },
+  { label: "ブランドトップ", href: "/" },
+  { label: "横浜中華街店", href: "/motomachi/" },
+  { label: "料金", href: "#pricing" },
+  { label: "アクセス", href: "#access" },
+  { label: "LINEで予約", href: "#line-placeholder" },
 ];
 
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Smart ホームシアター 大船',
-  image: 'https://example.com/images/ofuna/og.jpg',
-  url: 'https://example.com/ofuna/',
-  priceRange: '¥1,848〜',
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Smart ホームシアター 大船",
+  image: "https://example.com/images/ofuna/og.jpg",
+  url: "https://example.com/ofuna/",
+  priceRange: "¥1,848〜",
   address: {
-    '@type': 'PostalAddress',
-    addressLocality: '鎌倉市大船',
-    addressRegion: '神奈川県',
-    addressCountry: 'JP',
+    "@type": "PostalAddress",
+    addressLocality: "鎌倉市大船",
+    addressRegion: "神奈川県",
+    addressCountry: "JP",
   },
-  brand: { '@type': 'Brand', name: 'Smart ホームシアター' },
+  brand: { "@type": "Brand", name: "Smart ホームシアター" },
 };
 
-const heroBg = "linear-gradient(135deg, rgba(14,14,18,0.5), rgba(14,14,18,0.85)), url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1600&q=80')";
-const introImg = "url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=900&q=80')";
+const heroBg =
+  "linear-gradient(135deg, rgba(14,14,18,0.5), rgba(14,14,18,0.85)), url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1600&q=80')";
+const introImg =
+  "url('/images/ofuna/hero/ofuna.png')";
 
-const galleryItems = [
-  { full: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1600&q=80', thumb: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=900&q=80', alt: 'シアタールーム全景（差し替え予定）' },
-  { full: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=1600&q=80', thumb: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=600&q=80', alt: 'スクリーン投影（差し替え予定）' },
-  { full: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=1600&q=80', thumb: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=600&q=80', alt: '座席エリア（差し替え予定）' },
-  { full: 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&w=1600&q=80', thumb: 'https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&w=600&q=80', alt: '5chスピーカーシステム（差し替え予定）' },
-  { full: 'https://images.unsplash.com/photo-1559034687-1c9d6f1d4eb7?auto=format&fit=crop&w=1600&q=80', thumb: 'https://images.unsplash.com/photo-1559034687-1c9d6f1d4eb7?auto=format&fit=crop&w=600&q=80', alt: '飲食エリア（差し替え予定）' },
+const galleryFiles = [
+  "DSC_0406.jpg",
+  "DSC_0409.jpg",
+  "DSC_0418.jpg",
+  "DSC_0426.jpg",
+  "DSC_0433.jpg",
+  "DSC_0440 2.jpg",
+  "DSC_0442.jpg",
+  "DSC_0446 2.jpg",
+  "DSC_0449.jpg",
+  "DSC_0461 2.jpg",
+  "DSC_0462.jpg",
+  "DSC_0466.jpg",
+  "DSC_0467.jpg",
+  "DSC_0469.jpg",
+  "DSC_0471.jpg",
+  "DSC_0476.jpg",
+  "DSC_0479.jpg",
+  "DSC_0481.jpg",
+  "DSC_0482.jpg",
+  "DSC_0483.jpg",
+  "DSC_0485.jpg",
+  "DSC_0493.jpg",
 ];
 
+const galleryItems = galleryFiles.map((file, i) => {
+  const encoded = encodeURIComponent(file);
+  return {
+    full: `/images/ofuna/gallery/${encoded}`,
+    thumb: `/images/ofuna/gallery/thumb/${encoded}`,
+    alt: `大船店のスペースの様子 ${i + 1}`,
+  };
+});
+
 const pricingPlans = [
-  { name: '早朝プラン', price: '¥1,200', meta: '2時間〜利用OK', desc: '朝の早い時間にゆったり使えるお得プラン。 ※ 料金は差し替え予定', featured: false, ariaLabel: 'LINEで早朝プランを予約' },
-  { name: '基本プラン', price: '¥1,848', meta: '2時間〜利用OK', desc: '大人数の映画鑑賞・誕生日・ホームパーティに。一番選ばれているプランです。', featured: true, ariaLabel: 'LINEで基本プランを予約' },
-  { name: '長時間割引プラン', price: '¥1,500', meta: '4時間〜利用OK', desc: 'じっくり映画鑑賞・複数本一気見など、長時間利用がお得に。 ※ 料金は差し替え予定', featured: false, ariaLabel: 'LINEで長時間割引プランを予約' },
+  {
+    name: "早朝プラン",
+    price: "¥1,200",
+    meta: "2時間〜利用OK",
+    desc: "朝の早い時間にゆったり使えるお得プラン。 ※ 料金は差し替え予定",
+    featured: false,
+    ariaLabel: "LINEで早朝プランを予約",
+  },
+  {
+    name: "基本プラン",
+    price: "¥1,848",
+    meta: "2時間〜利用OK",
+    desc: "大人数の映画鑑賞・誕生日・ホームパーティに。一番選ばれているプランです。",
+    featured: true,
+    ariaLabel: "LINEで基本プランを予約",
+  },
+  {
+    name: "長時間割引プラン",
+    price: "¥1,500",
+    meta: "4時間〜利用OK",
+    desc: "じっくり映画鑑賞・複数本一気見など、長時間利用がお得に。 ※ 料金は差し替え予定",
+    featured: false,
+    ariaLabel: "LINEで長時間割引プランを予約",
+  },
 ];
 ---
 
@@ -74,7 +123,9 @@ const pricingPlans = [
         最大10名 / 33.2㎡。大船駅 南改札から徒歩すぐ、飲食・アルコール持込OKです。
       </p>
       <div class="hero-actions">
-        <a href="#pricing" class="btn-ghost">料金を見る <span class="arrow">→</span></a>
+        <a href="#pricing" class="btn-ghost"
+          >料金を見る <span class="arrow">→</span></a
+        >
         <LineButton size="large" label="LINEで予約する" />
       </div>
     </div>
@@ -102,7 +153,9 @@ const pricingPlans = [
         </div>
         <div class="spec-item">
           <div class="spec-label">最寄駅</div>
-          <div class="spec-value">大船<span class="small accent"> すぐ</span></div>
+          <div class="spec-value">
+            大船<span class="small accent"> すぐ</span>
+          </div>
         </div>
       </div>
     </div>
@@ -115,10 +168,23 @@ const pricingPlans = [
         <div class="text">
           <span class="eyebrow">About this Space</span>
           <h2>大船駅すぐ、<br />本格5chサラウンドの新拠点。</h2>
-          <p>大船駅 南改札から徒歩すぐ。33.2㎡のゆとりある空間で、最大10名まで貸切可能。4K UHDプロジェクター × 5chサラウンドで、自宅では再現できない臨場感を楽しめます。</p>
-          <p>飲食・アルコール持込OK。誕生日・ホームパーティ・ライブ視聴・ゲーム大会など、大人数で集まる利用シーンに最適です。</p>
+          <p>
+            大船駅
+            南改札から徒歩すぐ。33.2㎡のゆとりある空間で、最大10名まで貸切可能。4K
+            UHDプロジェクター ×
+            5chサラウンドで、自宅では再現できない臨場感を楽しめます。
+          </p>
+          <p>
+            飲食・アルコール持込OK。誕生日・ホームパーティ・ライブ視聴・ゲーム大会など、大人数で集まる利用シーンに最適です。
+          </p>
         </div>
-        <div class="visual" style={`background-image: ${introImg};`} role="img" aria-label="大船店の室内（差し替え予定）"></div>
+        <div
+          class="visual"
+          style={`background-image: ${introImg};`}
+          role="img"
+          aria-label="大船店の室内（差し替え予定）"
+        >
+        </div>
       </div>
     </div>
   </section>
@@ -129,19 +195,34 @@ const pricingPlans = [
       <div class="section-header">
         <span class="eyebrow">Gallery</span>
         <h2>スペースの様子。</h2>
-        <p class="mt-md">画像をタップで拡大表示できます。</p>
+        <p class="mt-md">
+          全{galleryItems.length}枚。画像をタップで拡大・スワイプで切り替えできます。
+        </p>
       </div>
 
       <div class="gallery">
-        {galleryItems.map((item) => (
-          <div
-            class="gallery-item"
-            data-gallery-item
-            data-full={item.full}
-            style={`background-image: url('${item.thumb}');`}
-            aria-label={item.alt}
-          ></div>
-        ))}
+        {
+          galleryItems.map((item, i) => (
+            <div
+              class:list={["gallery-item", i >= 5 && "is-hidden"]}
+              data-gallery-item
+              data-full={item.full}
+              style={`background-image: url('${item.thumb}');`}
+              aria-label={item.alt}
+            >
+              {i === 4 && galleryItems.length > 5 && (
+                <span class="gallery-more" aria-hidden="true">
+                  +{galleryItems.length - 5}
+                  <small>枚</small>
+                </span>
+              )}
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="gallery-counter" data-gallery-counter aria-hidden="true">
+        <span class="current">1</span> / {galleryItems.length}
       </div>
     </div>
   </section>
@@ -155,11 +236,21 @@ const pricingPlans = [
         <p class="mt-md">大船駅 南改札からのルートを動画でご案内します。</p>
       </div>
 
-      <div class="video-wrap" data-video-embed="https://www.youtube.com/embed/dQw4w9WgXcQ">
-        <div class="video-placeholder" role="button" tabindex="0" aria-label="行き方動画を再生（差し替え予定）">
+      <div
+        class="video-wrap"
+        data-video-embed="https://www.youtube.com/embed/dQw4w9WgXcQ"
+      >
+        <div
+          class="video-placeholder"
+          role="button"
+          tabindex="0"
+          aria-label="行き方動画を再生（差し替え予定）"
+        >
           <div class="play-icon" aria-hidden="true">▶</div>
           <div>行き方動画（差し替え予定）</div>
-          <small style="color: var(--text-muted); font-size: 12px;">タップで再生</small>
+          <small style="color: var(--text-muted); font-size: 12px;"
+            >タップで再生</small
+          >
         </div>
       </div>
     </div>
@@ -171,19 +262,26 @@ const pricingPlans = [
       <div class="section-header">
         <span class="eyebrow">Pricing</span>
         <h2>料金プラン</h2>
-        <p class="mt-md">用途にあわせて選べる料金プラン。表示価格は時間あたり（税込）。最低2時間〜のご利用です。</p>
+        <p class="mt-md">
+          用途にあわせて選べる料金プラン。表示価格は時間あたり（税込）。最低2時間〜のご利用です。
+        </p>
       </div>
 
       <div class="pricing-grid">
-        {pricingPlans.map((plan) => (
-          <div class:list={['price-card', plan.featured && 'featured']}>
-            <div class="plan-name">{plan.name}</div>
-            <div class="plan-price">{plan.price}<span class="unit">〜/時間</span></div>
-            <div class="plan-meta">{plan.meta}</div>
-            <p class="plan-desc">{plan.desc}</p>
-            <LineButton label="このプランで予約" ariaLabel={plan.ariaLabel} />
-          </div>
-        ))}
+        {
+          pricingPlans.map((plan) => (
+            <div class:list={["price-card", plan.featured && "featured"]}>
+              <div class="plan-name">{plan.name}</div>
+              <div class="plan-price">
+                {plan.price}
+                <span class="unit">〜/時間</span>
+              </div>
+              <div class="plan-meta">{plan.meta}</div>
+              <p class="plan-desc">{plan.desc}</p>
+              <LineButton label="このプランで予約" ariaLabel={plan.ariaLabel} />
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -226,7 +324,9 @@ const pricingPlans = [
         <div class="info-card">
           <h3><span class="icon" aria-hidden="true">📋</span>利用にあたって</h3>
           <ul class="rule-list">
-            <li class="ok"><span class="icon">●</span>飲食・アルコール持込OK</li>
+            <li class="ok">
+              <span class="icon">●</span>飲食・アルコール持込OK
+            </li>
             <li class="ok"><span class="icon">●</span>最大10名までゆったり</li>
             <li><span class="icon">✕</span>喫煙はご遠慮ください</li>
             <li><span class="icon">✕</span>大声・騒音など近隣迷惑行為禁止</li>
@@ -236,8 +336,14 @@ const pricingPlans = [
 
         <div class="info-card">
           <h3><span class="icon" aria-hidden="true">💡</span>はじめての方へ</h3>
-          <p style="font-size: 14px; color: var(--text-secondary);">入退室・鍵の受け渡しなどは、ご予約後にLINEで詳しくご案内します。手ぶらでお越しいただけます。</p>
-          <p style="font-size: 13px; color: var(--text-muted); margin-top: 12px;">※ キャンセルポリシー・支払い方法も同時にご案内します。</p>
+          <p style="font-size: 14px; color: var(--text-secondary);">
+            入退室・鍵の受け渡しなどは、ご予約後にLINEで詳しくご案内します。手ぶらでお越しいただけます。
+          </p>
+          <p
+            style="font-size: 13px; color: var(--text-muted); margin-top: 12px;"
+          >
+            ※ キャンセルポリシー・支払い方法も同時にご案内します。
+          </p>
         </div>
       </div>
     </div>
@@ -257,7 +363,10 @@ const pricingPlans = [
             <dt>住所</dt>
             <dd>神奈川県鎌倉市大船<br />（詳細住所は差し替え予定）</dd>
             <dt>最寄駅</dt>
-            <dd>JR大船駅「南改札」 <strong>徒歩すぐ</strong><br />横須賀線・東海道線・湘南新宿ライン・モノレール各線</dd>
+            <dd>
+              JR大船駅「南改札」 <strong>徒歩すぐ</strong><br
+              />横須賀線・東海道線・湘南新宿ライン・モノレール各線
+            </dd>
             <dt>営業時間</dt>
             <dd>10:00〜24:00</dd>
             <dt>定休日</dt>
@@ -270,17 +379,20 @@ const pricingPlans = [
             src="https://www.google.com/maps?q=大船駅&output=embed"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="大船店の地図"
-          ></iframe>
+            title="大船店の地図"></iframe>
         </div>
       </div>
 
       <div class="cross-sell">
         <div class="text">
           <h4>もう一方の店舗もご検討ください</h4>
-          <p>少人数（〜6名）でカジュアルに使うなら「横浜中華街店」がおすすめ。早朝¥577〜と気軽に始められます。</p>
+          <p>
+            少人数（〜6名）でカジュアルに使うなら「横浜中華街店」がおすすめ。早朝¥577〜と気軽に始められます。
+          </p>
         </div>
-        <a href="/motomachi/" class="btn-ghost">横浜中華街店を見る <span class="arrow">→</span></a>
+        <a href="/motomachi/" class="btn-ghost"
+          >横浜中華街店を見る <span class="arrow">→</span></a
+        >
       </div>
     </div>
   </section>
@@ -317,7 +429,9 @@ const pricingPlans = [
     <div class="container">
       <span class="eyebrow">Booking</span>
       <h2>予約は LINE から、1分で完了。</h2>
-      <p>空き状況の確認・ご予約は公式LINEから。よくあるご質問もLINEでお気軽にどうぞ。</p>
+      <p>
+        空き状況の確認・ご予約は公式LINEから。よくあるご質問もLINEでお気軽にどうぞ。
+      </p>
       <LineButton size="large" label="LINEで予約・空き状況確認" />
     </div>
   </section>
