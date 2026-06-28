@@ -1,45 +1,48 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import LineButton from '../components/LineButton.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LineButton from "../components/LineButton.astro";
 
 const navLinks = [
-  { label: 'コンセプト', href: '#concept' },
-  { label: 'スペース', href: '#spaces' },
-  { label: '利用シーン', href: '#scenes' },
+  { label: "コンセプト", href: "#concept" },
+  { label: "スペース", href: "#spaces" },
+  { label: "利用シーン", href: "#scenes" },
 ];
 
 const footerLinks = [
-  { label: 'コンセプト', href: '#concept' },
-  { label: '横浜中華街店', href: '/motomachi/' },
-  { label: '大船店', href: '/ofuna/' },
-  { label: 'LINEで予約', href: '#line-placeholder' },
+  { label: "コンセプト", href: "#concept" },
+  { label: "横浜中華街店", href: "/motomachi/" },
+  { label: "大船店", href: "/ofuna/" },
+  { label: "LINEで予約", href: "#line-placeholder" },
 ];
 
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Smart ホームシアター',
-  url: 'https://example.com/',
-  logo: 'https://example.com/assets/logo.png',
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Smart ホームシアター",
+  url: "https://example.com/",
+  logo: "https://example.com/assets/logo.png",
   sameAs: [],
   subOrganization: [
     {
-      '@type': 'LocalBusiness',
-      name: 'Smart ホームシアター 横浜中華街',
-      url: 'https://example.com/motomachi/',
+      "@type": "LocalBusiness",
+      name: "Smart ホームシアター 横浜中華街",
+      url: "https://example.com/motomachi/",
     },
     {
-      '@type': 'LocalBusiness',
-      name: 'Smart ホームシアター 大船',
-      url: 'https://example.com/ofuna/',
+      "@type": "LocalBusiness",
+      name: "Smart ホームシアター 大船",
+      url: "https://example.com/ofuna/",
     },
   ],
 };
 
-const heroBg = "linear-gradient(135deg, rgba(14,14,18,0.6), rgba(14,14,18,0.85)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80')";
+const heroBg =
+  "linear-gradient(135deg, rgba(14,14,18,0.6), rgba(14,14,18,0.85)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80')";
 
-const motomachiBg = "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6)), url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=900&q=80')";
-const ofunaBg = "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6)), url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=900&q=80')";
+const motomachiBg =
+  "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6)), url('/images/brand/motomachi.png')";
+const ofunaBg =
+  "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6)), url('/images/brand/ofuna.png')";
 ---
 
 <BaseLayout
@@ -78,26 +81,52 @@ const ofunaBg = "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6))
       <div class="section-header">
         <span class="eyebrow">Concept</span>
         <h2>"自宅では味わえない"を、<br />気軽に貸切で。</h2>
-        <p class="mt-md" style="max-width: 640px; margin-left: auto; margin-right: auto;">
-          Smart ホームシアターは、本物の映画館に近い体験を駅前の貸切空間で楽しめる、シアター特化のレンタルスペースです。少人数の映画鑑賞から、誕生日・ゲーム大会・ライブ配信視聴まで、用途を選びません。
+        <p
+          class="mt-md"
+          style="max-width: 640px; margin-left: auto; margin-right: auto;"
+        >
+          Smart
+          ホームシアターは、本物の映画館に近い体験を駅前の貸切空間で楽しめる、シアター特化のレンタルスペースです。少人数の映画鑑賞から、誕生日・ゲーム大会・ライブ配信視聴まで、用途を選びません。
         </p>
       </div>
 
       <div class="feature-grid">
         <div class="feature-card">
+          <img
+            class="feature-image"
+            src="/images/brand/screen.png"
+            alt="100インチ超の大画面シアター"
+            width="2500"
+            height="1663"
+            loading="lazy"
+          />
           <div class="feature-icon" aria-hidden="true">🎬</div>
           <h3>圧倒的な大画面</h3>
-          <p>100インチ以上の大スクリーン。映画館のような迫力で、何を観ても忘れられない時間に。</p>
+          <p>
+            100インチ以上の大スクリーン。映画館のような迫力で、何を観ても忘れられない時間に。
+          </p>
         </div>
         <div class="feature-card">
+          <img
+            class="feature-image"
+            src="/images/brand/audio.jpeg"
+            alt="マルチchサラウンド音響設備"
+            width="447"
+            height="447"
+            loading="lazy"
+          />
           <div class="feature-icon" aria-hidden="true">🔊</div>
           <h3>本格サラウンド音響</h3>
-          <p>マルチchサラウンドで、音に包まれる体験。映画もライブも臨場感が段違いです。</p>
+          <p>
+            マルチchサラウンドで、音に包まれる体験。映画もライブも臨場感が段違いです。
+          </p>
         </div>
         <div class="feature-card">
           <div class="feature-icon" aria-hidden="true">🚉</div>
           <h3>駅近・アクセス良好</h3>
-          <p>横浜中華街（石川町徒歩4分）と大船（大船駅徒歩4分）の2箇所。集合も解散もスマート。</p>
+          <p>
+            横浜中華街（石川町徒歩4分）と大船（大船駅徒歩4分）の2箇所。集合も解散もスマート。
+          </p>
         </div>
       </div>
     </div>
@@ -109,22 +138,50 @@ const ofunaBg = "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6))
       <div class="section-header">
         <span class="eyebrow">spaces</span>
         <h2>スペースはこちら</h2>
-        <p class="mt-md">少人数で気軽に楽しむなら横浜中華街店、大人数でプレミアム体験なら大船店。</p>
+        <p class="mt-md">
+          少人数で気軽に楽しむなら横浜中華街店、大人数でプレミアム体験なら大船店。
+        </p>
       </div>
 
       <div class="location-compare">
         <article class="location-card" data-location="motomachi">
-          <div class="card-image" style={`background-image: ${motomachiBg};`} role="img" aria-label="横浜中華街店のイメージ"></div>
+          <div
+            class="card-image"
+            style={`background-image: ${motomachiBg};`}
+            role="img"
+            aria-label="横浜中華街店のイメージ"
+          >
+          </div>
           <span class="badge">横浜中華街</span>
           <div class="card-body">
             <div class="card-title">Smart ホームシアター 横浜中華街</div>
-            <div class="card-access">📍 JR石川町 徒歩4分 / 元町・中華街 徒歩7分</div>
+            <div class="card-access">
+              📍 JR石川町 徒歩4分 / 元町・中華街 徒歩7分
+            </div>
 
             <ul class="spec-list">
-              <li><span class="label">スクリーン</span><span class="value">100<span class="unit">インチ</span> / FHD</span></li>
-              <li><span class="label">音響</span><span class="value">4ch サラウンド</span></li>
-              <li><span class="label">収容</span><span class="value">最大 6<span class="unit">名</span> / 25<span class="unit">㎡</span></span></li>
-              <li><span class="label">料金</span><span class="value highlight">¥577<span class="unit">〜 / 時間</span></span></li>
+              <li>
+                <span class="label">スクリーン</span><span class="value"
+                  >100<span class="unit">インチ</span> / FHD</span
+                >
+              </li>
+              <li>
+                <span class="label">音響</span><span class="value"
+                  >4ch サラウンド</span
+                >
+              </li>
+              <li>
+                <span class="label">収容</span><span class="value"
+                  >最大 6<span class="unit">名</span> / 25<span class="unit"
+                    >㎡</span
+                  ></span
+                >
+              </li>
+              <li>
+                <span class="label">料金</span><span class="value highlight"
+                  >¥1,200<span class="unit">〜 / 時間</span></span
+                >
+              </li>
             </ul>
 
             <div class="card-actions">
@@ -135,17 +192,41 @@ const ofunaBg = "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6))
         </article>
 
         <article class="location-card" data-location="ofuna">
-          <div class="card-image" style={`background-image: ${ofunaBg};`} role="img" aria-label="大船店のイメージ"></div>
-          <span class="badge">大船 NEW</span>
+          <div
+            class="card-image"
+            style={`background-image: ${ofunaBg};`}
+            role="img"
+            aria-label="大船店のイメージ"
+          >
+          </div>
+          <span class="badge">大船</span>
           <div class="card-body">
             <div class="card-title">Smart ホームシアター 大船</div>
-            <div class="card-access">📍 大船駅 南改札すぐ</div>
+            <div class="card-access">📍 大船駅 南改札徒歩4分</div>
 
             <ul class="spec-list">
-              <li><span class="label">スクリーン</span><span class="value">4K UHD<span class="unit"> プロジェクター</span></span></li>
-              <li><span class="label">音響</span><span class="value">5ch サラウンド</span></li>
-              <li><span class="label">収容</span><span class="value">最大 10<span class="unit">名</span> / 33.2<span class="unit">㎡</span></span></li>
-              <li><span class="label">料金</span><span class="value highlight">¥1,848<span class="unit">〜 / 時間</span></span></li>
+              <li>
+                <span class="label">スクリーン</span><span class="value"
+                  >100<span class="unit">インチ</span> / 4K UHD</span
+                >
+              </li>
+              <li>
+                <span class="label">音響</span><span class="value"
+                  >5ch サラウンド</span
+                >
+              </li>
+              <li>
+                <span class="label">収容</span><span class="value"
+                  >最大 10<span class="unit">名</span> / 33.2<span class="unit"
+                    >㎡</span
+                  ></span
+                >
+              </li>
+              <li>
+                <span class="label">料金</span><span class="value highlight"
+                  >¥1,200<span class="unit">〜 / 時間</span></span
+                >
+              </li>
             </ul>
 
             <div class="card-actions">
@@ -166,7 +247,10 @@ const ofunaBg = "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6))
         <h2>こんなシーンにぴったり。</h2>
       </div>
 
-      <ul class="tag-list" style="justify-content: center; max-width: 800px; margin: 0 auto;">
+      <ul
+        class="tag-list"
+        style="justify-content: center; max-width: 800px; margin: 0 auto;"
+      >
         <li>🎬 映画鑑賞会</li>
         <li>🎮 ゲーム大会（Switch / 配信）</li>
         <li>🎤 ライブ・推し活</li>
@@ -176,6 +260,7 @@ const ofunaBg = "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6))
         <li>👥 女子会 / 同窓会</li>
         <li>👨‍👩‍👧 ファミリーシアター</li>
         <li>📽 上映会 / プレゼン</li>
+        <li>✏️ 会議 / 研修</li>
       </ul>
     </div>
   </section>
@@ -184,7 +269,7 @@ const ofunaBg = "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6))
   <section class="final-cta">
     <div class="container">
       <span class="eyebrow">Booking</span>
-      <h2>予約は LINE から、1分で完了。</h2>
+      <h2>予約は LINE から1分で完了。</h2>
       <p>空き状況の確認・ご予約は、公式LINEからお気軽にどうぞ。</p>
       <LineButton size="large" label="LINEで予約・空き状況確認" />
     </div>

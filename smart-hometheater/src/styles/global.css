@@ -424,6 +424,18 @@ body.preview .hero { min-height: 700px; }
   padding: 32px 24px;
   text-align: center;
   transition: transform var(--transition), border-color var(--transition);
+  overflow: hidden;
+}
+
+.feature-image {
+  display: block;
+  width: calc(100% + 48px);
+  max-width: none;
+  height: 220px;
+  margin: -32px -24px 20px;
+  object-fit: cover;
+  object-position: center 50%;
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .feature-card:hover {
