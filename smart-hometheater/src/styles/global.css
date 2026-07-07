@@ -608,7 +608,7 @@ body.preview .hero { min-height: 700px; }
   justify-content: center;
   gap: 6px;
   padding: 13px 18px;
-  background: var(--accent);
+  background: #FF8C1A;
   color: #0E0E12;
   font-weight: 700;
   border-radius: var(--radius-pill);
@@ -617,7 +617,7 @@ body.preview .hero { min-height: 700px; }
 }
 
 .location-card .detail-btn:hover {
-  background: #FFD93D;
+  background: #FF7A00;
   transform: translateY(-1px);
   opacity: 1;
 }
