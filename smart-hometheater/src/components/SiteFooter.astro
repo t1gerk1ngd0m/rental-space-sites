@@ -5,14 +5,12 @@ interface FooterLink {
 }
 
 interface Props {
-  brandSubtitle?: string;
   homeHref?: string;
   links?: FooterLink[];
   copyright?: string;
 }
 
 const {
-  brandSubtitle = 'スマート ホームシアター',
   homeHref = '/',
   links = [],
   copyright = '© Smart ホームシアター',
@@ -22,12 +20,8 @@ const {
 <footer class="site-footer">
   <div class="container">
     <div class="footer-top">
-      <a href={homeHref} class="brand">
-        <span class="brand-mark">S</span>
-        <span>
-          <span class="brand-name-en">SMART HOMETHEATER</span><br />
-          <span class="brand-name-jp">{brandSubtitle}</span>
-        </span>
+      <a href={homeHref} class="brand" aria-label="Smart ホームシアター ホーム">
+        <img class="brand-mark" src="/images/brand/logo.png" alt="Smart Home Theater ロゴ" width="44" height="44" />
       </a>
       {links.length > 0 && (
         <ul class="footer-nav">

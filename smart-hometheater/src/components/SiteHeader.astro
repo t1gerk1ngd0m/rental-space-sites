@@ -1,19 +1,15 @@
 ---
-import LineButton from './LineButton.astro';
-
 interface NavLink {
   label: string;
   href: string;
 }
 
 interface Props {
-  brandSubtitle?: string;
   homeHref?: string;
   navLinks?: NavLink[];
 }
 
 const {
-  brandSubtitle = 'スマート ホームシアター',
   homeHref = '/',
   navLinks = [],
 } = Astro.props;
@@ -22,11 +18,7 @@ const {
 <header class="site-header">
   <div class="container">
     <a href={homeHref} class="brand" aria-label="Smart ホームシアター ホーム">
-      <img class="brand-mark" src="/images/brand/logo.png" alt="SMART HOMETHEATER ロゴ" width="28" height="28" />
-      <span>
-        <span class="brand-name-en">SMART HOMETHEATER</span><br />
-        <span class="brand-name-jp">{brandSubtitle}</span>
-      </span>
+      <img class="brand-mark" src="/images/brand/logo.png" alt="Smart Home Theater ロゴ" width="44" height="44" />
     </a>
     <nav class="nav" aria-label="メインナビ">
       {navLinks.length > 0 && (
@@ -36,7 +28,6 @@ const {
           ))}
         </ul>
       )}
-      <LineButton />
     </nav>
   </div>
 </header>

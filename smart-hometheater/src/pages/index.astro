@@ -3,275 +3,610 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import LineButton from "../components/LineButton.astro";
 
 const navLinks = [
-  { label: "コンセプト", href: "#concept" },
-  { label: "スペース", href: "#spaces" },
-  { label: "利用シーン", href: "#scenes" },
+  { label: "使用用途", href: "#scenes" },
+  { label: "横浜中華街店", href: "#yokohama" },
+  { label: "大船店", href: "#ofuna" },
+  { label: "利用の流れ", href: "#flow" },
+  { label: "お客様の声", href: "#voices" },
+  { label: "よくある質問", href: "#faq" },
+  { label: "アクセス", href: "#access" },
+  { label: "予約・お問い合わせ", href: "#booking" },
 ];
 
-const footerLinks = [
-  { label: "コンセプト", href: "#concept" },
-  { label: "横浜中華街店", href: "/motomachi/" },
-  { label: "大船店", href: "/ofuna/" },
-  { label: "LINEで予約", href: "#line-placeholder" },
-];
+const SPACEMARKET_YOKOHAMA = "https://www.spacemarket.com/spaces/theater-motomachi/";
+const SPACEMARKET_OFUNA = "https://www.spacemarket.com/spaces/theater-ofuna/";
+const INSTAGRAM_URL = "https://www.instagram.com/smart.hometheater/";
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Smart ホームシアター",
   url: "https://example.com/",
-  logo: "https://example.com/assets/logo.png",
-  sameAs: [],
+  logo: "https://example.com/images/brand/logo.png",
+  sameAs: [INSTAGRAM_URL],
   subOrganization: [
     {
       "@type": "LocalBusiness",
       name: "Smart ホームシアター 横浜中華街",
-      url: "https://example.com/motomachi/",
+      url: "https://example.com/#yokohama",
+      priceRange: "¥577〜",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "石川町1丁目",
+        addressLocality: "横浜市中区",
+        addressRegion: "神奈川県",
+        postalCode: "231-0868",
+        addressCountry: "JP",
+      },
     },
     {
       "@type": "LocalBusiness",
       name: "Smart ホームシアター 大船",
-      url: "https://example.com/ofuna/",
+      url: "https://example.com/#ofuna",
+      priceRange: "¥1,200〜",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "大船1丁目13-7 ステラビル5階",
+        addressLocality: "鎌倉市",
+        addressRegion: "神奈川県",
+        postalCode: "247-0056",
+        addressCountry: "JP",
+      },
     },
   ],
 };
 
 const heroBg =
-  "linear-gradient(135deg, rgba(14,14,18,0.6), rgba(14,14,18,0.85)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80')";
+  "linear-gradient(135deg, rgba(14,14,18,0.25), rgba(14,14,18,0.55)), url('/images/figma/hero-bg.jpg')";
 
 const motomachiBg =
   "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6)), url('/images/brand/motomachi.jpg')";
 const ofunaBg =
   "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6)), url('/images/brand/ofuna.png')";
+
+const personaCards = [
+  { image: "/images/figma/persona-movie.jpg", jp: "映画鑑賞", en: "Watch movie" },
+  { image: "/images/figma/persona-oshikatsu.jpg", jp: "推し活・ライブ鑑賞", en: "OSHI KATSU" },
+  { image: "/images/figma/persona-games.jpg", jp: "ゲーム大会", en: "Play games" },
+  { image: "/images/figma/persona-girlsparty.jpg", jp: "女子会・パーティ", en: "Girls party" },
+];
+
+// 横浜中華街店
+const yokohamaHeroImg = "url('/images/brand/motomachi.jpg')";
+
+const yokohamaEquipment = [
+  { label: "プロジェクター", brand: "XGIMI", img: "/images/figma/eq-yokohama-xgimi.png" },
+  { label: "アンプ", brand: "DENON", img: "/images/figma/eq-yokohama-denon.png" },
+  { label: "音響", brand: "POLK AUDIO Monitor XTシリーズ", img: "/images/figma/eq-yokohama-polk-1.png" },
+  { label: "再生機器", brand: "Blu-rayプレイヤー", img: "/images/figma/eq-yokohama-bluray.png" },
+  { label: "ゲーム機器", brand: "Nintendo Switch", img: "/images/figma/eq-switch.png" },
+];
+
+const yokohamaGallery = [
+  { full: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=1600&q=80", thumb: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=900&q=80", alt: "シアタールーム全景（差し替え予定）" },
+  { full: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80", thumb: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80", alt: "スクリーン投影の様子（差し替え予定）" },
+  { full: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&w=1600&q=80", thumb: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&w=600&q=80", alt: "キッチンエリア（差し替え予定）" },
+  { full: "https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&w=1600&q=80", thumb: "https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&w=600&q=80", alt: "サウンドシステム（差し替え予定）" },
+  { full: "https://images.unsplash.com/photo-1585951237318-9ea5e175b891?auto=format&fit=crop&w=1600&q=80", thumb: "https://images.unsplash.com/photo-1585951237318-9ea5e175b891?auto=format&fit=crop&w=600&q=80", alt: "ゲーム機・周辺機器（差し替え予定）" },
+];
+
+const yokohamaReviews = [
+  "/images/figma/review-yokohama-1.png",
+  "/images/figma/review-yokohama-2.png",
+  "/images/figma/review-yokohama-3.png",
+  "/images/figma/review-yokohama-4.png",
+];
+
+// 大船店
+const ofunaHeroImg = "url('/images/ofuna/hero/ofuna.png')";
+
+const ofunaEquipment = [
+  { label: "プロジェクター", brand: "XGIMI", img: "/images/figma/eq-ofuna-xgimi.png" },
+  { label: "アンプ", brand: "DENON", img: "/images/figma/eq-ofuna-denon.png" },
+  { label: "音響", brand: "POLK AUDIO Monitor XTシリーズ", img: "/images/figma/eq-ofuna-polk.png" },
+  { label: "再生機器", brand: "Blu-rayプレイヤー LG UBK80S", img: "/images/figma/eq-ofuna-bluray.png" },
+  { label: "ゲーム機器", brand: "Nintendo Switch", img: "/images/figma/eq-switch.png" },
+];
+
+const ofunaGalleryFiles = [
+  "DSC_0406.jpg", "DSC_0409.jpg", "DSC_0418.jpg", "DSC_0426.jpg", "DSC_0433.jpg",
+  "DSC_0440 2.jpg", "DSC_0442.jpg", "DSC_0446 2.jpg", "DSC_0449.jpg", "DSC_0461 2.jpg",
+  "DSC_0462.jpg", "DSC_0466.jpg", "DSC_0467.jpg", "DSC_0469.jpg", "DSC_0471.jpg",
+  "DSC_0476.jpg", "DSC_0479.jpg", "DSC_0481.jpg", "DSC_0482.jpg", "DSC_0483.jpg",
+  "DSC_0485.jpg", "DSC_0493.jpg",
+];
+
+const ofunaGallery = ofunaGalleryFiles.map((file, i) => {
+  const encoded = encodeURIComponent(file);
+  const thumb = `/images/ofuna/gallery/thumb/${encoded}`;
+  return {
+    full: thumb,
+    thumb,
+    alt: `大船店のスペースの様子 ${i + 1}`,
+  };
+});
+
+const ofunaReviews = [
+  "/images/figma/review-yokohama-1.png",
+  "/images/figma/review-ofuna-2.png",
+  "/images/figma/review-ofuna-3.png",
+  "/images/figma/review-ofuna-4.png",
+];
+
+const steps = [
+  { label: "STEP 01", en: "RESERVE", jp: "WEB予約", desc: "お好きな日時を選んで\n24時間いつでも予約可能" },
+  { label: "STEP 02", en: "ENTER", jp: "入室", desc: "予約確定後に入室方法や\n機材の利用方法をお送りします" },
+  { label: "STEP 03", en: "ENJOY", jp: "自由に過ごす", desc: "映画・ゲームなど\n自由にお楽しみください" },
+  { label: "STEP 04", en: "CLEANING", jp: "清掃後退出", desc: "簡単なセルフクリーニングをして\n退出をお願いします" },
+];
+
+const reviewSummaryImages = [
+  "/images/figma/review-summary-1.png",
+  "/images/figma/review-summary-2.png",
+  "/images/figma/review-summary-3.png",
+  "/images/figma/review-ofuna-4.png",
+  "/images/figma/review-summary-5.png",
+  "/images/figma/review-summary-6.png",
+];
+
+const faqs = [
+  { q: "ゴミは捨てられますか？", a: "基本的にはお持ち帰りをお願いしていますが、有料のゴミ回収オプション（¥550）もご用意しています。" },
+  { q: "商用利用・撮影は可能ですか？", a: "商用撮影オプション（¥1,650）にご加入いただければ可能です。事前にLINEでご相談ください。" },
+  { q: "駐輪場はありますか？", a: "店舗専用の駐輪場はございません。近隣のコインパーキング・駐輪場をご利用ください。" },
+];
 ---
 
 <BaseLayout
-  title="Smart ホームシアター｜100インチ大画面と本格音響のレンタルスペース（横浜中華街・大船）"
-  description="Smart ホームシアターは、100インチ大画面と本格サラウンド音響を備えたレンタルスペース。横浜中華街店と大船店の2箇所。映画鑑賞・誕生日・ゲーム・ライブ視聴に。LINEから直予約で1分。"
+  title="Smart ホームシアター｜友達と過ごす特別な時間を。大画面シアター貸切スペース（横浜中華街・大船）"
+  description="友達とのパーティー、推し活、映画鑑賞に。100インチ大画面と本格音響の貸切ホームシアター。横浜中華街店・大船店の2拠点、スペースマーケットから空き状況確認・予約できます。"
   canonical="https://example.com/"
-  ogTitle="Smart ホームシアター｜100インチ大画面のレンタルスペース"
-  ogDescription="横浜中華街・大船の2箇所。本格音響と大画面で、映画・ライブ・誕生日を特別な時間に。LINEから1分予約。"
+  ogTitle="Smart ホームシアター｜友達と過ごす特別な時間を。"
+  ogDescription="横浜中華街・大船の2拠点。映画も、推し活も、パーティーも。大画面×本格音響の貸切シアター。"
   ogImage="https://example.com/images/brand/og.jpg"
   navLinks={navLinks}
-  footerLinks={footerLinks}
   jsonLd={jsonLd}
 >
-  <!-- HERO -->
+  <!-- SECTION 1: HERO -->
   <section class="hero" style={`--hero-image: ${heroBg};`}>
+    <div class="hero-follow">
+      <span>FOLLOW US</span>
+      <div class="divider"></div>
+      <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagramをフォロー">
+        <img src="/images/figma/icon-instagram.png" alt="" width="18" height="18" />
+      </a>
+    </div>
     <div class="container">
-      <p class="hero-eyebrow">PREMIUM HOME THEATER RENTAL</p>
-      <h1>本格音響と<br />大画面を、あなたの街に。</h1>
-      <p class="hero-subtitle">
-        100インチを超える大画面、4ch以上のサラウンド音響、駅近の貸切空間。<br />
-        映画もライブも、誕生日も、Smart ホームシアターで特別な時間に。
-      </p>
-      <div class="hero-actions">
-        <a href="#spaces" class="btn-ghost">
-          場所を見る <span class="arrow">→</span>
-        </a>
-        <LineButton size="large" label="LINEで予約する" />
+      <div class="hero-wordmark">
+        <p class="smart">Smart</p>
+        <h1>HOMETHEATER</h1>
+        <p class="hero-subtitle">
+          大画面×高音質のプライベートシアター<br />
+          映画鑑賞も、推し活も、パーティーも、周りを気にせず楽しめます
+        </p>
       </div>
     </div>
     <div class="hero-scroll" aria-hidden="true">SCROLL</div>
   </section>
 
-  <!-- CONCEPT -->
-  <section id="concept">
+  <!-- SECTION 2: 映画をきっかけに -->
+  <section id="scenes">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">Concept</span>
-        <h2>"自宅では味わえない"を、<br />気軽に貸切で。</h2>
-        <p
-          class="mt-md"
-          style="max-width: 640px; margin-left: auto; margin-right: auto;"
-        >
-          Smart
-          ホームシアターは、本物の映画館に近い体験を駅前の貸切空間で楽しめる、シアター特化のレンタルスペースです。少人数の映画鑑賞から、誕生日・ゲーム大会・ライブ配信視聴まで、用途を選びません。
+        <span class="eyebrow">Purpose</span>
+        <h2>映画をきっかけに<br />気づけば夜まで盛り上がる</h2>
+        <p class="mt-md" style="max-width: 640px; margin-left: auto; margin-right: auto;">
+          映画館のような設備と、リビングのようなくつろぎ<br />
+          時間を忘れて楽しめるSmartホームシアターへ<br /><br />
+          映画やライブ配信を楽しんだあとは、<br />
+          そのままゲームをしたり、ごはんを食べたり、写真を撮ったり<br />
+          気づけば「また来たいね」と話している。<br />
+          そんなホームシアター空間です。
         </p>
       </div>
 
-      <div class="feature-grid">
-        <div class="feature-card">
-          <img
-            class="feature-image"
-            src="/images/brand/screen.jpg"
-            alt="100インチ超の大画面シアター"
-            width="2500"
-            height="1663"
-            loading="lazy"
-          />
-          <div class="feature-icon" aria-hidden="true">🎬</div>
-          <h3>圧倒的な大画面</h3>
-          <p>
-            100インチ以上の大スクリーン。映画館のような迫力で、何を観ても忘れられない時間に。
-          </p>
+      <div class="persona-grid">
+        <div class="persona-col">
+          {personaCards.slice(0, 2).map((card) => (
+            <div class="persona-card" style={`background-image: url('${card.image}');`}>
+              <p class="jp">{card.jp}</p>
+              <p class="en">{card.en}</p>
+            </div>
+          ))}
         </div>
-        <div class="feature-card">
-          <img
-            class="feature-image"
-            src="/images/brand/audio.jpeg"
-            alt="マルチchサラウンド音響設備"
-            width="447"
-            height="447"
-            loading="lazy"
-          />
-          <div class="feature-icon" aria-hidden="true">🔊</div>
-          <h3>本格サラウンド音響</h3>
-          <p>
-            マルチchサラウンドで、音に包まれる体験。映画もライブも臨場感が段違いです。
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true">🚉</div>
-          <h3>駅近・アクセス良好</h3>
-          <p>
-            横浜中華街（石川町徒歩4分）と大船（大船駅徒歩4分）の2箇所。集合も解散もスマート。
-          </p>
+        <div class="persona-col offset">
+          {personaCards.slice(2, 4).map((card) => (
+            <div class="persona-card" style={`background-image: url('${card.image}');`}>
+              <p class="jp">{card.jp}</p>
+              <p class="en">{card.en}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- spaces -->
+  <!-- SECTION 3: あなたはどっち？ -->
   <section id="spaces" style="background: var(--bg-secondary);">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">spaces</span>
-        <h2>スペースはこちら</h2>
-        <p class="mt-md">
-          少人数で気軽に楽しむなら横浜中華街店、大人数でプレミアム体験なら大船店。
-        </p>
+        <span class="eyebrow">location</span>
+        <h2>あなたはどっち？</h2>
       </div>
 
       <div class="location-compare">
-        <article class="location-card" data-location="motomachi">
-          <div
-            class="card-image"
-            style={`background-image: ${motomachiBg};`}
-            role="img"
-            aria-label="横浜中華街店のイメージ"
-          >
+        <article class="location-card" data-location="yokohama">
+          <div class="card-image" style={`background-image: ${motomachiBg};`} role="img" aria-label="横浜中華街店のイメージ"></div>
+          <div class="name-stack">
+            <p class="watermark">YOKOHAMA</p>
+            <p class="card-title">横浜中華街店</p>
           </div>
-          <span class="badge">横浜中華街</span>
           <div class="card-body">
-            <div class="card-title">Smart ホームシアター 横浜中華街</div>
-            <div class="card-access">
-              📍 JR石川町 徒歩4分 / 元町・中華街 徒歩7分
+            <p class="card-copy">元町・中華街エリアでふらっと立ち寄れる</p>
+            <div class="capacity-row">
+              <span class="badge">定員人数</span>
+              <span>6人収容・6人着席可能 / 25㎡</span>
             </div>
-
-            <ul class="spec-list">
-              <li>
-                <span class="label">スクリーン</span><span class="value"
-                  >100<span class="unit">インチ</span> / FHD</span
-                >
-              </li>
-              <li>
-                <span class="label">音響</span><span class="value"
-                  >4ch サラウンド</span
-                >
-              </li>
-              <li>
-                <span class="label">収容</span><span class="value"
-                  >最大 6<span class="unit">名</span> / 25<span class="unit"
-                    >㎡</span
-                  ></span
-                >
-              </li>
-              <li>
-                <span class="label">料金</span><span class="value highlight"
-                  >¥1,200<span class="unit">〜 / 時間</span></span
-                >
-              </li>
-            </ul>
-
-            <div class="card-actions">
-              <a href="/motomachi/" class="detail-btn">詳細を見る →</a>
-              <LineButton label="LINE" ariaLabel="LINEで横浜中華街店を予約" />
-            </div>
+            <div class="card-access"><img src="/images/figma/icon-train.png" alt="" class="icon-train" />JR根岸線 石川町駅 徒歩4分</div>
+            <a href="#yokohama" class="arrow-btn" aria-label="横浜中華街店の詳細を見る"></a>
           </div>
         </article>
 
         <article class="location-card" data-location="ofuna">
-          <div
-            class="card-image"
-            style={`background-image: ${ofunaBg};`}
-            role="img"
-            aria-label="大船店のイメージ"
-          >
+          <div class="card-image" style={`background-image: ${ofunaBg};`} role="img" aria-label="大船店のイメージ"></div>
+          <div class="name-stack">
+            <p class="watermark">SHONAN</p>
+            <p class="card-title">大船</p>
           </div>
-          <span class="badge">大船</span>
           <div class="card-body">
-            <div class="card-title">Smart ホームシアター 大船</div>
-            <div class="card-access">📍 大船駅 南改札徒歩4分</div>
-
-            <ul class="spec-list">
-              <li>
-                <span class="label">スクリーン</span><span class="value"
-                  >100<span class="unit">インチ</span> / 4K UHD</span
-                >
-              </li>
-              <li>
-                <span class="label">音響</span><span class="value"
-                  >5ch サラウンド</span
-                >
-              </li>
-              <li>
-                <span class="label">収容</span><span class="value"
-                  >最大 10<span class="unit">名</span> / 33.2<span class="unit"
-                    >㎡</span
-                  ></span
-                >
-              </li>
-              <li>
-                <span class="label">料金</span><span class="value highlight"
-                  >¥1,200<span class="unit">〜 / 時間</span></span
-                >
-              </li>
-            </ul>
-
-            <div class="card-actions">
-              <a href="/ofuna/" class="detail-btn">詳細を見る →</a>
-              <LineButton label="LINE" ariaLabel="LINEで大船店を予約" />
+            <p class="card-copy">大船駅すぐ。大人数の集まりにも。</p>
+            <div class="capacity-row">
+              <span class="badge">定員人数</span>
+              <span>10人収容・8人着席可能 / 33.2㎡</span>
             </div>
+            <div class="card-access"><img src="/images/figma/icon-train.png" alt="" class="icon-train" />湘南モノレール 大船駅 徒歩4分</div>
+            <a href="#ofuna" class="arrow-btn" aria-label="大船の詳細を見る"></a>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- SCENES -->
-  <section id="scenes">
+  <!-- SECTION 4A: 横浜中華街店 詳細 -->
+  <section id="yokohama" class="detail-section" data-location="yokohama">
+    <div class="glow top" aria-hidden="true"></div>
+    <div class="glow bottom" aria-hidden="true"></div>
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">Use Cases</span>
-        <h2>こんなシーンにぴったり。</h2>
+        <span class="eyebrow">YOKOHAMA</span>
+        <h2>横浜中華街店</h2>
       </div>
 
-      <ul
-        class="tag-list"
-        style="justify-content: center; max-width: 800px; margin: 0 auto;"
-      >
-        <li>🎬 映画鑑賞会</li>
-        <li>🎮 ゲーム大会（Switch / 配信）</li>
-        <li>🎤 ライブ・推し活</li>
-        <li>🎂 誕生日サプライズ</li>
-        <li>🍿 アニメ一気観</li>
-        <li>📺 スポーツ観戦</li>
-        <li>👥 女子会 / 同窓会</li>
-        <li>👨‍👩‍👧 ファミリーシアター</li>
-        <li>📽 上映会 / プレゼン</li>
-        <li>✏️ 会議 / 研修</li>
-      </ul>
+      <div class="detail-hero" style={`background-image: ${yokohamaHeroImg};`} role="img" aria-label="横浜中華街店の室内（差し替え予定）">
+        <div class="detail-hero-stat">
+          <div class="capacity-row">
+            <span class="badge">定員人数</span>
+            <span>6人収容・6人着席可能 / 25㎡</span>
+          </div>
+          <div class="access-row"><img src="/images/figma/icon-train.png" alt="" class="icon-train" />JR根岸線 石川町駅 徒歩4分</div>
+        </div>
+      </div>
+
+      <p class="detail-intro">
+        石川町駅から徒歩4分、元町・中華街駅からも徒歩7分。中華街での食べ歩きのあとに、ふかふかのソファがある貸切シアターへ。大画面のスクリーンと、迫力ある音響。映画も、推し活も、ゲームも、気づけば時間を忘れてしまう、そんなひとときを。
+      </p>
+
+      <div class="equipment-row">
+        {yokohamaEquipment.map((item) => (
+          <div class="equipment-item">
+            <p class="label">{item.label}</p>
+            <p class="brand">{item.brand}</p>
+            <img src={item.img} alt={item.brand} loading="lazy" />
+          </div>
+        ))}
+      </div>
+
+      <div class="gallery mt-lg">
+        {yokohamaGallery.map((item) => (
+          <div
+            class="gallery-item"
+            data-gallery-item
+            data-full={item.full}
+            style={`background-image: url('${item.thumb}');`}
+            aria-label={item.alt}
+          ></div>
+        ))}
+      </div>
+
+      <div class="review-image-grid">
+        {yokohamaReviews.map((src, i) => (
+          <div class="review-image-card">
+            <img src={src} alt={`横浜中華街店の口コミ ${i + 1}`} loading="lazy" />
+          </div>
+        ))}
+      </div>
+      <p class="review-note">※レビューはスペースマーケットに投稿された、2026年8月時点のものです。</p>
+
+      <div class="text-center">
+        <a href={SPACEMARKET_YOKOHAMA} target="_blank" rel="noopener noreferrer" class="availability-btn">
+          <span class="icon-badge">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="17" rx="2" />
+              <path d="M3 9h18M8 2v4M16 2v4" />
+            </svg>
+          </span>
+          <span class="label"><small>横浜中華街店の</small><strong>空き状況を確認する</strong></span>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- FINAL CTA -->
-  <section class="final-cta">
+  <!-- SECTION 4B: 大船店 詳細 -->
+  <section id="ofuna" class="detail-section" data-location="ofuna" style="background: var(--bg-secondary);">
+    <div class="glow top" aria-hidden="true"></div>
+    <div class="glow bottom" aria-hidden="true"></div>
     <div class="container">
-      <span class="eyebrow">Booking</span>
-      <h2>予約は LINE から1分で完了。</h2>
-      <p>空き状況の確認・ご予約は、公式LINEからお気軽にどうぞ。</p>
-      <LineButton size="large" label="LINEで予約・空き状況確認" />
+      <div class="section-header">
+        <span class="eyebrow">OFUNA</span>
+        <h2>大船</h2>
+      </div>
+
+      <div class="detail-hero" style={`background-image: ${ofunaHeroImg};`} role="img" aria-label="大船店の室内">
+        <div class="detail-hero-stat">
+          <div class="capacity-row">
+            <span class="badge">定員人数</span>
+            <span>10人収容・8人着席可能 / 33.2㎡</span>
+          </div>
+          <div class="access-row"><img src="/images/figma/icon-train.png" alt="" class="icon-train" />湘南モノレール 大船駅 徒歩4分</div>
+        </div>
+      </div>
+
+      <p class="detail-intro">
+        大船駅から徒歩4分。最大10名まで入れる広めの空間で、パーティーや女子会にもぴったりです。飲食・アルコール持込OK。キッチン設備もあり、ホームパーティの延長として使えます。
+      </p>
+
+      <div class="equipment-row">
+        {ofunaEquipment.map((item) => (
+          <div class="equipment-item">
+            <p class="label">{item.label}</p>
+            <p class="brand">{item.brand}</p>
+            <img src={item.img} alt={item.brand} loading="lazy" />
+          </div>
+        ))}
+      </div>
+
+      <div class="gallery mt-lg">
+        {ofunaGallery.slice(0, 5).map((item, i) => (
+          <div
+            class:list={["gallery-item", i >= 4 && "is-hidden"]}
+            data-gallery-item
+            data-full={item.full}
+            style={`background-image: url('${item.thumb}');`}
+            aria-label={item.alt}
+          >
+            {i === 3 && (
+              <span class="gallery-more" aria-hidden="true">
+                +{ofunaGallery.length - 4}
+                <small>枚</small>
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div class="review-image-grid">
+        {ofunaReviews.map((src, i) => (
+          <div class="review-image-card">
+            <img src={src} alt={`大船店の口コミ ${i + 1}`} loading="lazy" />
+          </div>
+        ))}
+      </div>
+      <p class="review-note">※レビューはスペースマーケットに投稿された、2026年8月時点のものです。</p>
+
+      <div class="text-center">
+        <a href={SPACEMARKET_OFUNA} target="_blank" rel="noopener noreferrer" class="availability-btn">
+          <span class="icon-badge">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="17" rx="2" />
+              <path d="M3 9h18M8 2v4M16 2v4" />
+            </svg>
+          </span>
+          <span class="label"><small>大船の</small><strong>空き状況を確認する</strong></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: FIRE TV -->
+  <section id="firetv">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">FIRE TV</span>
+        <h2>映画もドラマもアニメも<br />大画面で見放題</h2>
+      </div>
+
+      <div class="firetv-content">
+        <img src="/images/figma/firetv-logos.png" alt="対応する動画配信サービス（Netflix・U-NEXT・TVer・Hulu・Prime Videoなど）" loading="lazy" />
+        <img src="/images/figma/firetv-stick.png" alt="Fire TV Stick" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: STEPS -->
+  <section id="flow" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">STEPS</span>
+        <h2>はじめての方も安心して<br />ご利用いただけます</h2>
+      </div>
+
+      <div class="steps-flow">
+        {steps.map((step, i) => (
+          <>
+            <div class="step">
+              <p class="step-label">{step.label}</p>
+              <p class="step-en">{step.en}</p>
+              <p class="step-jp">{step.jp}</p>
+              <p class="step-desc">{step.desc.split("\n").map((line) => <>{line}<br /></>)}</p>
+            </div>
+            {i < steps.length - 1 && <span class="arrow" aria-hidden="true">→</span>}
+          </>
+        ))}
+      </div>
+
+      <p class="rule-list">
+        喫煙・騒音・迷惑行為は禁止です。<br />
+        キャンセル料は予約成立後から発生するため、日程変更は利用2日前12時までにご連絡ください。
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: REVIEWS -->
+  <section id="voices">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">REVIEWS</span>
+        <h2>お客様の声</h2>
+      </div>
+
+      <div class="review-scores">
+        <div class="review-score">
+          <p class="store">横浜中華街店 <span class="count">196件</span></p>
+          <p class="score"><span class="star">★</span>4.7</p>
+        </div>
+        <div class="review-score">
+          <p class="store">大船店 <span class="count">50件</span></p>
+          <p class="score"><span class="star">★</span>4.8</p>
+        </div>
+      </div>
+
+      <div class="review-image-grid" style="grid-template-columns: repeat(3, 1fr);">
+        {reviewSummaryImages.map((src, i) => (
+          <div class="review-image-card">
+            <img src={src} alt={`お客様の声 ${i + 1}`} loading="lazy" />
+          </div>
+        ))}
+      </div>
+      <p class="review-note">※レビューはスペースマーケットに投稿された、2026年8月時点のものです。</p>
+    </div>
+  </section>
+
+  <!-- SECTION 8: FAQ -->
+  <section id="faq" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">FAQ</span>
+        <h2>よくある質問</h2>
+      </div>
+
+      <div class="faq-list">
+        {faqs.map((item) => (
+          <details class="faq-item">
+            <summary><span class="q-mark">Q.</span><span class="q-text">{item.q}</span></summary>
+            <div class="answer">
+              <span class="a-mark">A.</span>
+              <p>{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9: ACCESS -->
+  <section id="access">
+    <div class="container">
+      <div class="access-block" style="--loc-accent: var(--yokohama);">
+        <h3 style="color: var(--loc-accent);">横浜中華街店</h3>
+        <div class="access-grid">
+          <div class="access-info">
+            <dl>
+              <dt>住所</dt>
+              <dd>〒231-0868<br />神奈川県横浜市中区石川町1丁目</dd>
+              <dt>最寄駅</dt>
+              <dd>
+                JR根岸線 石川町駅 徒歩4分<br />
+                みなとみらい線 元町・中華街駅 徒歩7分<br />
+                JR根岸線 関内駅 徒歩17分<br />
+                みなとみらい線 日本大通り駅 徒歩18分<br />
+                ブルーライン 伊勢佐木長者町駅 徒歩20分<br />
+                JR東海道本線(東京〜熱海) 横浜駅 バス15分<br /><br />
+                石川町駅の元町口改札を出ていただきます。詳細な住所やその後の道順は、ご予約後にメッセージにてお送りする資料に記載しております。
+              </dd>
+            </dl>
+          </div>
+          <div class="map-embed">
+            <iframe
+              src="https://www.google.com/maps?q=神奈川県横浜市中区石川町1丁目&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="横浜中華街店の地図"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="access-block" style="--loc-accent: var(--ofuna);">
+        <h3 style="color: var(--loc-accent);">大船</h3>
+        <div class="access-grid">
+          <div class="access-info">
+            <dl>
+              <dt>住所</dt>
+              <dd>〒247-0056<br />神奈川県鎌倉市大船1丁目13-7 ステラビル5階<br />※エレベーターなし</dd>
+              <dt>最寄駅</dt>
+              <dd>
+                湘南モノレール 大船駅 徒歩4分<br />
+                湘南モノレール 富士見町駅 徒歩11分<br /><br />
+                大船駅の南改札を東口側に出ていただきます。詳細な住所やその後の道順は、ご予約後にメッセージにてお送りする資料に記載しております。
+              </dd>
+            </dl>
+          </div>
+          <div class="map-embed">
+            <iframe
+              src="https://www.google.com/maps?q=神奈川県鎌倉市大船1丁目13-7&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="大船店の地図"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10: 予約・お問い合わせ -->
+  <section id="booking" class="final-cta">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="glow second" aria-hidden="true"></div>
+    <div class="container">
+      <div class="cta-columns">
+        <div>
+          <span class="eyebrow">RESERVATION</span>
+          <h2>予約・空き状況</h2>
+          <p>空き状況の確認・ご予約は 右のボタンのスペースマーケットからご確認ください</p>
+          <div class="cta-buttons">
+            <a href={SPACEMARKET_YOKOHAMA} target="_blank" rel="noopener noreferrer" class="availability-btn" data-location="yokohama">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="17" rx="2" />
+                <path d="M3 9h18M8 2v4M16 2v4" />
+              </svg>
+              <span class="label"><small>横浜中華街店の</small><strong>空き状況を確認する</strong></span>
+            </a>
+            <a href={SPACEMARKET_OFUNA} target="_blank" rel="noopener noreferrer" class="availability-btn" data-location="ofuna">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="17" rx="2" />
+                <path d="M3 9h18M8 2v4M16 2v4" />
+              </svg>
+              <span class="label"><small>大船の</small><strong>空き状況を確認する</strong></span>
+            </a>
+          </div>
+        </div>
+        <div>
+          <span class="eyebrow">CONTACT</span>
+          <h2>お問い合わせ</h2>
+          <p>ご不明な点ございましたら LINEからお問い合わせください</p>
+          <LineButton size="large" label="LINEから問い合わせる" ariaLabel="LINEから問い合わせる" />
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>

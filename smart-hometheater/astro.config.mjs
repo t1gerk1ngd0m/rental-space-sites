@@ -8,4 +8,8 @@ export default defineConfig({
   build: {
     format: 'directory',
   },
+  redirects: {
+    '/motomachi': { status: 301, destination: '/#yokohama' },
+    '/ofuna': { status: 301, destination: '/#ofuna' },
+  },
 });
