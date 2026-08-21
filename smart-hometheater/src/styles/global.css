@@ -279,8 +279,8 @@ p {
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  padding: calc(var(--header-h) + 40px) 0 80px;
+  align-items: flex-end;
+  padding: calc(var(--header-h) + 40px) 0 120px;
   overflow: hidden;
   border-top: none;
 }
@@ -372,10 +372,7 @@ body.preview .hero { min-height: 700px; }
 }
 
 .hero-subtitle {
-  position: absolute;
-  left: 50%;
-  bottom: 110px;
-  transform: translateX(-50%);
+  margin-top: 20px;
   z-index: 2;
   font-size: clamp(14px, 1.6vw, 18px);
   font-weight: 500;
@@ -387,14 +384,6 @@ body.preview .hero { min-height: 700px; }
   text-align: center;
   overflow-wrap: anywhere;
   word-break: break-word;
-}
-
-@media (max-width: 640px) {
-  .hero-subtitle {
-    position: static;
-    transform: none;
-    margin: 20px auto 0;
-  }
 }
 
 .hero-scroll {
