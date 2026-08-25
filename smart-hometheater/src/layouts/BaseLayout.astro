@@ -1,85 +1,37 @@
 ---
-import '../styles/global.css';
-import SiteHeader from '../components/SiteHeader.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-
-interface NavLink {
-  label: string;
-  href: string;
-}
-
-interface Props {
-  title: string;
-  description: string;
-  canonical: string;
-  ogTitle?: string;
-  ogDescription?: string;
-  ogImage?: string;
-  bodyClass?: string;
-  brandSubtitle?: string;
-  homeHref?: string;
-  navLinks?: NavLink[];
-  footerLinks?: NavLink[];
-  copyright?: string;
-  jsonLd?: object;
-}
-
-const {
-  title,
-  description,
-  canonical,
-  ogTitle = title,
-  ogDescription = description,
-  ogImage,
-  bodyClass = '',
-  brandSubtitle,
-  homeHref,
-  navLinks,
-  footerLinks,
-  copyright,
-  jsonLd,
-} = Astro.props;
+import "../styles/global.css";
 ---
 
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0E0E12" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta name="robots" content="index,follow" />
-    <link rel="canonical" href={canonical} />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={ogTitle} />
-    <meta property="og:description" content={ogDescription} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    <meta property="og:url" content={canonical} />
-    <meta property="og:site_name" content="Smart ホームシアター" />
+<head>
+  <link as="image" fetchpriority="high" href="/images/figma/hero-bg.webp" rel="preload" type="image/webp" />
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="#0E0E12" name="theme-color" />
+  <title>横浜中華街・大船の貸切シアター＆レンタルスペース｜Smartホームシアター</title>
+  <link rel="icon" href="/images/brand/logo.svg" type="image/svg+xml">
+  <meta content="横浜中華街店（石川町駅 徒歩4分）と大船店（大船駅 徒歩4分）の2拠点。映画館のような設備と、リビングのようなくつろぎで、映画鑑賞・推し活・誕生日会・ゲーム大会・スポーツ観戦に。"
+    name="description" />
+  <meta name="robots" content="index,follow"> 
+  <link href="https://example.com/" rel="canonical" />
+  <meta content="website" property="og:type" />
+  <meta content="Smart ホームシアター｜友達と過ごす特別な時間を。" property="og:title" />
+  <meta content="横浜中華街・大船の2拠点。映画も、推し活も、パーティーも。大画面×本格音響の貸切シアター。" property="og:description" />
+  <meta content="https://example.com/images/brand/og.jpg" property="og:image" />
+  <meta content="https://example.com/" property="og:url" />
+  <meta content="Smart ホームシアター" property="og:site_name" />
+  <script
+    is:inline
+    type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Smart ホームシアター","url":"https://example.com/","logo":"https://example.com/images/brand/logo.webp","sameAs":["https://www.instagram.com/smart.hometheater/"],"subOrganization":[{"@type":"LocalBusiness","name":"Smart ホームシアター 横浜中華街","url":"https://example.com/#yokohama","priceRange":"¥577〜","address":{"@type":"PostalAddress","streetAddress":"石川町1丁目","addressLocality":"横浜市中区","addressRegion":"神奈川県","postalCode":"231-0868","addressCountry":"JP"}},{"@type":"LocalBusiness","name":"Smart ホームシアター 大船","url":"https://example.com/#ofuna","priceRange":"¥1,200〜","address":{"@type":"PostalAddress","streetAddress":"大船1丁目13-7 ステラビル5階","addressLocality":"鎌倉市","addressRegion":"神奈川県","postalCode":"247-0056","addressCountry":"JP"}}]}</script>
+</head>
 
-    {jsonLd && (
-      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    )}
-  </head>
+<body class="">
+  <slot />
+  <script>
+    import "../scripts/main.js";
+  </script>
+</body>
 
-  <body class={bodyClass}>
-    <SiteHeader
-      brandSubtitle={brandSubtitle}
-      homeHref={homeHref}
-      navLinks={navLinks}
-    />
-
-    <slot />
-
-    <SiteFooter
-      brandSubtitle={brandSubtitle}
-      homeHref={homeHref}
-      links={footerLinks}
-      copyright={copyright}
-    />
-
-    <script src="/scripts/main.js" is:inline></script>
-  </body>
 </html>

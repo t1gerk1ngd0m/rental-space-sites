@@ -1,13 +1,3 @@
-# Astro
+node_modules/
 dist/
 .astro/
-
-# Node
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-pnpm-debug.log*
-
-# Env
-.env
-.env.production

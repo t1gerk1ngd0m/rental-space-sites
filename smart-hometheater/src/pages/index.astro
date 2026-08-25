@@ -1,277 +1,850 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import LineButton from "../components/LineButton.astro";
-
-const navLinks = [
-  { label: "コンセプト", href: "#concept" },
-  { label: "スペース", href: "#spaces" },
-  { label: "利用シーン", href: "#scenes" },
-];
-
-const footerLinks = [
-  { label: "コンセプト", href: "#concept" },
-  { label: "横浜中華街店", href: "/motomachi/" },
-  { label: "大船店", href: "/ofuna/" },
-  { label: "LINEで予約", href: "#line-placeholder" },
-];
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Smart ホームシアター",
-  url: "https://example.com/",
-  logo: "https://example.com/assets/logo.png",
-  sameAs: [],
-  subOrganization: [
-    {
-      "@type": "LocalBusiness",
-      name: "Smart ホームシアター 横浜中華街",
-      url: "https://example.com/motomachi/",
-    },
-    {
-      "@type": "LocalBusiness",
-      name: "Smart ホームシアター 大船",
-      url: "https://example.com/ofuna/",
-    },
-  ],
-};
-
-const heroBg =
-  "linear-gradient(135deg, rgba(14,14,18,0.6), rgba(14,14,18,0.85)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80')";
-
-const motomachiBg =
-  "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6)), url('/images/brand/motomachi.jpg')";
-const ofunaBg =
-  "linear-gradient(180deg, rgba(14,14,18,0.2), rgba(14,14,18,0.6)), url('/images/brand/ofuna.png')";
 ---
 
-<BaseLayout
-  title="Smart ホームシアター｜100インチ大画面と本格音響のレンタルスペース（横浜中華街・大船）"
-  description="Smart ホームシアターは、100インチ大画面と本格サラウンド音響を備えたレンタルスペース。横浜中華街店と大船店の2箇所。映画鑑賞・誕生日・ゲーム・ライブ視聴に。LINEから直予約で1分。"
-  canonical="https://example.com/"
-  ogTitle="Smart ホームシアター｜100インチ大画面のレンタルスペース"
-  ogDescription="横浜中華街・大船の2箇所。本格音響と大画面で、映画・ライブ・誕生日を特別な時間に。LINEから1分予約。"
-  ogImage="https://example.com/images/brand/og.jpg"
-  navLinks={navLinks}
-  footerLinks={footerLinks}
-  jsonLd={jsonLd}
->
-  <!-- HERO -->
-  <section class="hero" style={`--hero-image: ${heroBg};`}>
-    <div class="container">
-      <p class="hero-eyebrow">PREMIUM HOME THEATER RENTAL</p>
-      <h1>本格音響と<br />大画面を、あなたの街に。</h1>
-      <p class="hero-subtitle">
-        100インチを超える大画面、4ch以上のサラウンド音響、駅近の貸切空間。<br />
-        映画もライブも、誕生日も、Smart ホームシアターで特別な時間に。
-      </p>
-      <div class="hero-actions">
-        <a href="#spaces" class="btn-ghost">
-          場所を見る <span class="arrow">→</span>
-        </a>
-        <LineButton size="large" label="LINEで予約する" />
-      </div>
-    </div>
-    <div class="hero-scroll" aria-hidden="true">SCROLL</div>
-  </section>
+<BaseLayout>
 
-  <!-- CONCEPT -->
-  <section id="concept">
+  <header class="site-header">
     <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">Concept</span>
-        <h2>"自宅では味わえない"を、<br />気軽に貸切で。</h2>
-        <p
-          class="mt-md"
-          style="max-width: 640px; margin-left: auto; margin-right: auto;"
-        >
-          Smart
-          ホームシアターは、本物の映画館に近い体験を駅前の貸切空間で楽しめる、シアター特化のレンタルスペースです。少人数の映画鑑賞から、誕生日・ゲーム大会・ライブ配信視聴まで、用途を選びません。
+      <a aria-label="Smart ホームシアター ホーム" class="brand" href="/">
+        <picture>
+          <img class="brand-mark" decoding="async" height="44" src="/images/brand/logo.svg" alt="Smart Home Theater ロゴ">
+        </picture>
+      </a>
+      <nav aria-label="メインナビ" class="nav">
+        <ul class="nav-links">
+          <li><a href="#scenes">使用用途</a></li>
+          <li><a href="#yokohama">横浜中華街店</a></li>
+          <li><a href="#ofuna">大船店</a></li>
+          <li><a href="#flow">利用の流れ</a></li>
+          <li><a href="#voices">お客様の声</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+          <li><a href="#access">アクセス</a></li>
+          <li>
+            <a href="https://lin.ee/NxsG2bB" class="nav-line-btn" target="_blank" rel="noopener noreferrer">
+              <img aria-hidden="true" src="./images/figma/line-icon.svg" class="nav-line-icon" alt="">
+              <p>予約・お問い合わせ</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <section class="hero">
+    <figure aria-hidden="true" class="hero__image">
+      <picture>
+        <source srcset="/images/figma/hero-bg-sp.webp" media="(max-width: 767px)" type="image/webp" />
+        <img src="/images/figma/hero-bg.webp" alt="" width="1490" height="990" fetchpriority="high" />
+      </picture>
+    </figure>
+    <div class="hero-follow"> <span>FOLLOW US</span>
+      <div class="divider"></div> <a aria-label="Instagramをフォロー" href="https://www.instagram.com/smart.hometheater/"
+        rel="noopener noreferrer" target="_blank">
+        <picture>
+          <source srcset="/images/figma/icon-instagram.webp" type="image/webp" /><img alt="" decoding="async"
+            height="18" src="/images/figma/icon-instagram.png" width="18" />
+        </picture>
+      </a>
+    </div>
+    <div class="container">
+      <div class="hero-wordmark">
+        <p class="smart">Smart</p>
+        <h1 class="hero-wordmark__title">
+          <span>HOME</span>
+          <span>THEATER</span>
+        </h1>
+        <p class="hero-subtitle">
+          大画面×高音質のプライベートシアター<br>
+          映画鑑賞も、推し活も、パーティーも、<br class="sp-only">周りを気にせず楽しめます
         </p>
       </div>
-
-      <div class="feature-grid">
-        <div class="feature-card">
-          <img
-            class="feature-image"
-            src="/images/brand/screen.jpg"
-            alt="100インチ超の大画面シアター"
-            width="2500"
-            height="1663"
-            loading="lazy"
-          />
-          <div class="feature-icon" aria-hidden="true">🎬</div>
-          <h3>圧倒的な大画面</h3>
-          <p>
-            100インチ以上の大スクリーン。映画館のような迫力で、何を観ても忘れられない時間に。
-          </p>
-        </div>
-        <div class="feature-card">
-          <img
-            class="feature-image"
-            src="/images/brand/audio.jpeg"
-            alt="マルチchサラウンド音響設備"
-            width="447"
-            height="447"
-            loading="lazy"
-          />
-          <div class="feature-icon" aria-hidden="true">🔊</div>
-          <h3>本格サラウンド音響</h3>
-          <p>
-            マルチchサラウンドで、音に包まれる体験。映画もライブも臨場感が段違いです。
-          </p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true">🚉</div>
-          <h3>駅近・アクセス良好</h3>
-          <p>
-            横浜中華街（石川町徒歩4分）と大船（大船駅徒歩4分）の2箇所。集合も解散もスマート。
-          </p>
-        </div>
-      </div>
     </div>
+    <div aria-hidden="true" class="hero-scroll">SCROLL</div>
   </section>
-
-  <!-- spaces -->
-  <section id="spaces" style="background: var(--bg-secondary);">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">spaces</span>
-        <h2>スペースはこちら</h2>
-        <p class="mt-md">
-          少人数で気軽に楽しむなら横浜中華街店、大人数でプレミアム体験なら大船店。
-        </p>
-      </div>
-
-      <div class="location-compare">
-        <article class="location-card" data-location="motomachi">
-          <div
-            class="card-image"
-            style={`background-image: ${motomachiBg};`}
-            role="img"
-            aria-label="横浜中華街店のイメージ"
-          >
-          </div>
-          <span class="badge">横浜中華街</span>
-          <div class="card-body">
-            <div class="card-title">Smart ホームシアター 横浜中華街</div>
-            <div class="card-access">
-              📍 JR石川町 徒歩4分 / 元町・中華街 徒歩7分
-            </div>
-
-            <ul class="spec-list">
-              <li>
-                <span class="label">スクリーン</span><span class="value"
-                  >100<span class="unit">インチ</span> / FHD</span
-                >
-              </li>
-              <li>
-                <span class="label">音響</span><span class="value"
-                  >4ch サラウンド</span
-                >
-              </li>
-              <li>
-                <span class="label">収容</span><span class="value"
-                  >最大 6<span class="unit">名</span> / 25<span class="unit"
-                    >㎡</span
-                  ></span
-                >
-              </li>
-              <li>
-                <span class="label">料金</span><span class="value highlight"
-                  >¥1,200<span class="unit">〜 / 時間</span></span
-                >
-              </li>
-            </ul>
-
-            <div class="card-actions">
-              <a href="/motomachi/" class="detail-btn">詳細を見る →</a>
-              <LineButton label="LINE" ariaLabel="LINEで横浜中華街店を予約" />
-            </div>
-          </div>
-        </article>
-
-        <article class="location-card" data-location="ofuna">
-          <div
-            class="card-image"
-            style={`background-image: ${ofunaBg};`}
-            role="img"
-            aria-label="大船店のイメージ"
-          >
-          </div>
-          <span class="badge">大船</span>
-          <div class="card-body">
-            <div class="card-title">Smart ホームシアター 大船</div>
-            <div class="card-access">📍 大船駅 南改札徒歩4分</div>
-
-            <ul class="spec-list">
-              <li>
-                <span class="label">スクリーン</span><span class="value"
-                  >100<span class="unit">インチ</span> / 4K UHD</span
-                >
-              </li>
-              <li>
-                <span class="label">音響</span><span class="value"
-                  >5ch サラウンド</span
-                >
-              </li>
-              <li>
-                <span class="label">収容</span><span class="value"
-                  >最大 10<span class="unit">名</span> / 33.2<span class="unit"
-                    >㎡</span
-                  ></span
-                >
-              </li>
-              <li>
-                <span class="label">料金</span><span class="value highlight"
-                  >¥1,200<span class="unit">〜 / 時間</span></span
-                >
-              </li>
-            </ul>
-
-            <div class="card-actions">
-              <a href="/ofuna/" class="detail-btn">詳細を見る →</a>
-              <LineButton label="LINE" ariaLabel="LINEで大船店を予約" />
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- SCENES -->
   <section id="scenes">
     <div class="container">
+      <div class="section-header"> <span class="eyebrow">Purpose</span>
+        <h2>映画をきっかけに<br />気づけば夜まで盛り上がる</h2>
+        <p class="mt-md section-lead">
+          映画館のような設備と、<br class="sp-only">リビングのようなくつろぎ<br>
+          時間を忘れて楽しめる<br class="sp-only">Smartホームシアターへ<br /><br>
+          映画やライブ配信を楽しんだあとは、<br>
+          そのままゲームをしたり、<br class="sp-only">ごはんを食べたり、写真を撮ったり<br>
+          気づけば「また来たいね」<br class="sp-only">と話している。<br>
+          そんなホームシアター空間です。
+        </p>
+      </div>
+      <div class="persona-grid">
+        <div class="persona-col">
+          <figure class="persona-card persona-card--movie">
+            <picture>
+              <source srcset="/images/figma/persona-movie.webp" type="image/webp" /><img alt=""
+                class="persona-card__image" decoding="async" height="2338" loading="lazy"
+                src="/images/figma/persona-movie.jpg" width="3500" />
+            </picture>
+            <p class="jp">映画鑑賞</p>
+            <p class="en">Watch movie</p>
+          </figure>
+          <figure class="persona-card persona-card--oshikatsu">
+            <picture>
+              <source srcset="/images/figma/persona-oshikatsu.webp" type="image/webp" /><img alt=""
+                class="persona-card__image" decoding="async" height="896" loading="lazy"
+                src="/images/figma/persona-oshikatsu.jpg" width="1196" />
+            </picture>
+            <p class="jp">推し活・ライブ鑑賞</p>
+            <p class="en">OSHI KATSU</p>
+          </figure>
+        </div>
+        <div class="persona-col offset">
+          <figure class="persona-card persona-card--games">
+            <picture>
+              <source srcset="/images/figma/persona-games.webp" type="image/webp" /><img alt=""
+                class="persona-card__image" decoding="async" height="1440" loading="lazy"
+                src="/images/figma/persona-games.jpg" width="1917" />
+            </picture>
+            <p class="jp">ゲーム大会</p>
+            <p class="en">Play games</p>
+          </figure>
+          <figure class="persona-card persona-card--girlsparty">
+            <picture>
+              <source srcset="/images/figma/persona-girlsparty.webp" type="image/webp" /><img alt=""
+                class="persona-card__image" decoding="async" height="1437" loading="lazy"
+                src="/images/figma/persona-girlsparty.jpg" width="1926" />
+            </picture>
+            <p class="jp">女子会・パーティ</p>
+            <p class="en">Girls party</p>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="spaces">
+    <div class="container">
+      <div class="section-header"> <span class="eyebrow">location</span>
+        <h2>あなたはどっち？</h2>
+      </div>
+      <div class="location-compare">
+        <a class="location-card" data-location="yokohama" href="#yokohama">
+          <figure class="card-image">
+            <picture>
+              <source srcset="/images/brand/motomachi.webp" type="image/webp" />
+              <img alt="横浜中華街店のイメージ" class="card-image__img" decoding="async" height="767" loading="lazy"
+                src="/images/brand/motomachi.jpg" width="1226" />
+            </picture>
+          </figure>
+
+          <div class="name-stack">
+            <p class="watermark">YOKOHAMA</p>
+            <p class="card-title">横浜中華街店</p>
+          </div>
+
+          <div class="card-body">
+            <p class="card-copy">元町・中華街エリアで<br class="sp-only">ふらっと立ち寄れる</p>
+
+            <div class="capacity-row">
+              <span class="badge">定員<br class="sp-only">人数</span>
+              <span>6人収容・<br class="sp-only">6人着席可能 / 25㎡</span>
+            </div>
+
+            <div class="card-access">
+              <img src="/images/figma/icon-train.svg" alt="" class="icon-train">
+              JR根岸線 石川町駅<br class="sp-only">徒歩4分
+            </div>
+
+            <span class="arrow-btn">
+              <img src="/images/figma/arrow-btn-yokohama.svg" alt="" width="24" height="24">
+            </span>
+          </div>
+        </a>
+
+        <a class="location-card" data-location="ofuna" href="#ofuna">
+          <figure class="card-image">
+            <picture>
+              <source srcset="/images/brand/ofuna.webp" type="image/webp" />
+              <img alt="大船店のイメージ" class="card-image__img" decoding="async" height="1700" loading="lazy"
+                src="/images/brand/ofuna.jpg" width="2880" />
+            </picture>
+          </figure>
+
+          <div class="name-stack">
+            <p class="watermark">OFUNA</p>
+            <p class="card-title">大船店</p>
+          </div>
+
+          <div class="card-body">
+            <p class="card-copy">大船駅すぐ。<br class="sp-only">大人数の集まりにも。</p>
+
+            <div class="capacity-row">
+              <span class="badge">定員<br class="sp-only">人数</span>
+              <span>10人収容・<br class="sp-only">8人着席可能 / 33.2㎡</span>
+            </div>
+
+            <div class="card-access">
+              <img src="/images/figma/icon-train.svg" alt="" class="icon-train">
+              湘南モノレール 大船駅<br class="sp-only">徒歩4分
+            </div>
+
+            <span class="arrow-btn">
+              <img src="/images/figma/arrow-btn-ofuna.svg" alt="" width="24" height="24">
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="detail-section" data-location="yokohama" id="yokohama">
+    <!-- 横浜 -->
+    <div class="detail-arc-area">
+      <figure aria-hidden="true" class="detail-arc">
+        <picture>
+          <!-- SP：480px以下 -->
+          <source srcset="/images/figma/arc-yokohama-sp.webp" media="(max-width: 480px)" type="image/webp">
+          <source srcset="/images/figma/arc-yokohama-sp.png" media="(max-width: 480px)" type="image/png">
+
+          <!-- PC：481px以上 -->
+          <source srcset="/images/figma/arc-yokohama-pc.webp" type="image/webp">
+
+          <img src="/images/figma/arc-yokohama-pc.png" alt="" width="1427" height="705">
+        </picture>
+      </figure>
       <div class="section-header">
-        <span class="eyebrow">Use Cases</span>
-        <h2>こんなシーンにぴったり。</h2>
+        <span class="eyebrow">YOKOHAMA</span>
+        <h2>横浜中華街店</h2>
+      </div>
+    </div>
+
+    <div class="container">
+      <figure class="detail-hero">
+        <picture>
+          <source srcset="/images/brand/motomachi.webp" type="image/webp" /><img alt="横浜中華街店の室内"
+            class="detail-hero__image" decoding="async" height="767" loading="lazy" src="/images/brand/motomachi.jpg"
+            width="1226" />
+        </picture>
+        <div class="detail-hero-stat">
+          <div class="capacity-row"> <span class="badge">定員人数</span> <span>6人収容・6人着席可能 / 25㎡</span> </div>
+          <div class="access-row">
+            <img alt="" class="icon-train" decoding="async" height="500" src="/images/figma/icon-train.svg"
+              width="500" />JR根岸線 石川町駅 徒歩4分
+          </div>
+        </div>
+      </figure>
+
+      <div class="equipment-row">
+
+        <div class="equipment-item">
+          <figure class="equipment-item__image">
+            <picture>
+              <source srcset="/images/figma/eq-yokohama-1.webp" type="image/webp" />
+              <img src="/images/figma/eq-yokohama-1.png" alt="プロジェクター XGIMI" width="470" height="400" loading="lazy"
+                decoding="async" />
+            </picture>
+          </figure>
+        </div>
+
+        <div class="equipment-item">
+          <figure class="equipment-item__image">
+            <picture>
+              <source srcset="/images/figma/eq-yokohama-2.webp" type="image/webp" />
+              <img src="/images/figma/eq-yokohama-2.png" alt="音響 POLK AUDIO Monitor XTシリーズ" width="486" height="432"
+                loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+        </div>
+
+        <div class="equipment-item">
+          <figure class="equipment-item__image">
+            <picture>
+              <source srcset="/images/figma/eq-yokohama-3.webp" type="image/webp" />
+              <img src="/images/figma/eq-yokohama-3.png" alt="アンプ DENON" width="486" height="440" loading="lazy"
+                decoding="async" />
+            </picture>
+          </figure>
+        </div>
+
+        <div class="equipment-item">
+          <figure class="equipment-item__image">
+            <picture>
+              <source srcset="/images/figma/eq-yokohama-4.webp" type="image/webp" />
+              <img src="/images/figma/eq-yokohama-4.png" alt="再生機器 Blu-rayプレイヤー BDP-S1500" width="486" height="400"
+                loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+        </div>
+
+        <div class="equipment-item">
+          <figure class="equipment-item__image">
+            <picture>
+              <source srcset="/images/figma/eq-yokohama-5.webp" type="image/webp" />
+              <img src="/images/figma/eq-yokohama-5.png" alt="ゲーム機器 Nintendo Switch" width="486" height="424"
+                loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+        </div>
+
       </div>
 
-      <ul
-        class="tag-list"
-        style="justify-content: center; max-width: 800px; margin: 0 auto;"
-      >
-        <li>🎬 映画鑑賞会</li>
-        <li>🎮 ゲーム大会（Switch / 配信）</li>
-        <li>🎤 ライブ・推し活</li>
-        <li>🎂 誕生日サプライズ</li>
-        <li>🍿 アニメ一気観</li>
-        <li>📺 スポーツ観戦</li>
-        <li>👥 女子会 / 同窓会</li>
-        <li>👨‍👩‍👧 ファミリーシアター</li>
-        <li>📽 上映会 / プレゼン</li>
-        <li>✏️ 会議 / 研修</li>
-      </ul>
-    </div>
-  </section>
 
-  <!-- FINAL CTA -->
-  <section class="final-cta">
-    <div class="container">
-      <span class="eyebrow">Booking</span>
-      <h2>予約は LINE から1分で完了。</h2>
-      <p>空き状況の確認・ご予約は、公式LINEからお気軽にどうぞ。</p>
-      <LineButton size="large" label="LINEで予約・空き状況確認" />
+      <div class="gallery mt-lg">
+        <div aria-label="横浜中華街店のスペースの様子 1" class="gallery-item" data-full="/images/figma/detail-yokohama-1.webp"
+          data-gallery-item="">
+          <picture>
+            <source srcset="/images/figma/detail-yokohama-1.webp" type="image/webp" /><img alt="横浜中華街店のスペースの様子 1"
+              class="gallery-item__image" decoding="async" height="960" loading="lazy"
+              src="/images/figma/detail-yokohama-1.png" width="1256" />
+          </picture>
+        </div>
+        <div aria-label="横浜中華街店のスペースの様子 2" class="gallery-item" data-full="/images/figma/detail-yokohama-2.webp"
+          data-gallery-item="">
+          <picture>
+            <source srcset="/images/figma/detail-yokohama-2.webp" type="image/webp" /><img alt="横浜中華街店のスペースの様子 2"
+              class="gallery-item__image" decoding="async" height="468" loading="lazy"
+              src="/images/figma/detail-yokohama-2.png" width="628" />
+          </picture>
+        </div>
+        <div aria-label="横浜中華街店のスペースの様子 3" class="gallery-item" data-full="/images/figma/detail-yokohama-3.webp"
+          data-gallery-item="">
+          <picture>
+            <source srcset="/images/figma/detail-yokohama-3.webp" type="image/webp" /><img alt="横浜中華街店のスペースの様子 3"
+              class="gallery-item__image" decoding="async" height="468" loading="lazy"
+              src="/images/figma/detail-yokohama-3.png" width="628" />
+          </picture>
+        </div>
+        <div aria-label="横浜中華街店のスペースの様子 4" class="gallery-item" data-full="/images/figma/detail-yokohama-4.webp"
+          data-gallery-item="">
+          <picture>
+            <source srcset="/images/figma/detail-yokohama-4.webp" type="image/webp" /><img alt="横浜中華街店のスペースの様子 4"
+              class="gallery-item__image" decoding="async" height="468" loading="lazy"
+              src="/images/figma/detail-yokohama-4.png" width="628" />
+          </picture>
+        </div>
+        <div aria-label="横浜中華街店のスペースの様子 5" class="gallery-item" data-full="/images/figma/detail-yokohama-5.webp"
+          data-gallery-item="">
+          <picture>
+            <source srcset="/images/figma/detail-yokohama-5.webp" type="image/webp" /><img alt="横浜中華街店のスペースの様子 5"
+              class="gallery-item__image" decoding="async" height="468" loading="lazy"
+              src="/images/figma/detail-yokohama-5.png" width="628" />
+          </picture>
+        </div>
+      </div>
+      <div class="review-image-grid">
+        <figure class="review-image-card">
+          <picture>
+            <source srcset="/images/figma/review-yokohama-1.webp" type="image/webp" /><img alt="横浜中華街店の口コミ 1"
+              decoding="async" height="416" loading="lazy" src="/images/figma/review-yokohama-1.png" width="1332" />
+          </picture>
+        </figure>
+        <figure class="review-image-card">
+          <picture>
+            <source srcset="/images/figma/review-yokohama-2.webp" type="image/webp" /><img alt="横浜中華街店の口コミ 2"
+              decoding="async" height="362" loading="lazy" src="/images/figma/review-yokohama-2.png" width="1348" />
+          </picture>
+        </figure>
+        <figure class="review-image-card">
+          <picture>
+            <source srcset="/images/figma/review-yokohama-3.webp" type="image/webp" /><img alt="横浜中華街店の口コミ 3"
+              decoding="async" height="382" loading="lazy" src="/images/figma/review-yokohama-3.png" width="1338" />
+          </picture>
+        </figure>
+        <figure class="review-image-card">
+          <picture>
+            <source srcset="/images/figma/review-yokohama-4.webp" type="image/webp" /><img alt="横浜中華街店の口コミ 4"
+              decoding="async" height="396" loading="lazy" src="/images/figma/review-yokohama-4.png" width="1316" />
+          </picture>
+        </figure>
+      </div>
+      <p class="review-note">※レビューはスペースマーケットに投稿された、2026年8月時点のものです。</p>
+      <div class="text-center">
+        <a aria-label="LINEから問い合わせる" class="line-btn" href="https://lin.ee/NxsG2bB" target="_blank"
+          rel="noopener noreferrer">
+          <span class="line-btn__inner">
+            <span class="line-btn__icon">
+              <img src="./images/figma/line-icon.svg" alt="">
+            </span>
+            <span class="line-btn__label">LINEから<br class="sp-only">予約・お問い合わせ</span>
+            <span class="line-btn__arrow">
+              <img src="./images/figma/line-arrow.svg" alt="">
+            </span>
+          </span>
+        </a>
+      </div>
     </div>
   </section>
+  <section class="detail-section" data-location="ofuna" id="ofuna">
+
+    <!-- 大船店 -->
+    <div class="detail-arc-area">
+      <figure aria-hidden="true" class="detail-arc">
+        <picture>
+
+          <!-- SP：480px以下 -->
+          <source srcset="/images/figma/arc-ofuna-sp.webp" media="(max-width: 480px)" type="image/webp">
+          <source srcset="/images/figma/arc-ofuna-sp.png" media="(max-width: 480px)" type="image/png">
+
+          <!-- PC：481px以上 -->
+          <source srcset="/images/figma/arc-ofuna-pc.webp" type="image/webp">
+
+          <img src="/images/figma/arc-ofuna-pc.png" alt="" width="1425" height="701">
+        </picture>
+      </figure>
+
+      <div class="section-header"> <span class="eyebrow">OFUNA</span>
+        <h2>大船店</h2>
+      </div>
+    </div>
+
+    <div class="container">
+      <figure class="detail-hero">
+        <picture>
+          <source srcset="/images/brand/ofuna.webp" type="image/webp" /><img alt="大船店の室内" class="detail-hero__image"
+            decoding="async" height="1700" loading="lazy" src="/images/brand/ofuna.jpg" width="2880" />
+        </picture>
+        <div class="detail-hero-stat">
+          <div class="capacity-row"> <span class="badge">定員人数</span> <span>10人収容・8人着席可能 / 33.2㎡</span> </div>
+          <div class="access-row">
+            <img alt="" class="icon-train" decoding="async" height="500" src="/images/figma/icon-train.svg"
+              width="500" />湘南モノレール 大船駅 徒歩4分
+          </div>
+        </div>
+      </figure>
+
+      <div class="equipment-row">
+
+        <div class="equipment-item">
+          <figure class="equipment-item__image">
+            <picture>
+              <source srcset="/images/figma/eq-ofuna-1.webp" type="image/webp" />
+              <img src="/images/figma/eq-ofuna-1.png" alt="プロジェクター XGIMI" width="470" height="404" loading="lazy"
+                decoding="async" />
+            </picture>
+          </figure>
+        </div>
+
+        <div class="equipment-item">
+          <figure class="equipment-item__image">
+            <picture>
+              <source srcset="/images/figma/eq-ofuna-2.webp" type="image/webp" />
+              <img src="/images/figma/eq-ofuna-2.png" alt="アンプ DENON" width="492" height="412" loading="lazy"
+                decoding="async" />
+            </picture>
+          </figure>
+        </div>
+
+        <div class="equipment-item">
+          <figure class="equipment-item__image">
+            <picture>
+              <source srcset="/images/figma/eq-ofuna-3.webp" type="image/webp" />
+              <img src="/images/figma/eq-ofuna-3.png" alt="音響 POLK AUDIO Monitor XTシリーズ" width="562" height="428"
+                loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+        </div>
+
+        <div class="equipment-item">
+          <figure class="equipment-item__image">
+            <picture>
+              <source srcset="/images/figma/eq-ofuna-4.webp" type="image/webp" />
+              <img src="/images/figma/eq-ofuna-4.png" alt="再生機器 Blu-rayプレイヤー LG UBK80S" width="610" height="458"
+                loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+        </div>
+
+        <div class="equipment-item">
+          <figure class="equipment-item__image">
+            <picture>
+              <source srcset="/images/figma/eq-ofuna-5.webp" type="image/webp" />
+              <img src="/images/figma/eq-ofuna-5.png" alt="ゲーム機器 Nintendo Switch" width="486" height="404"
+                loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="gallery mt-lg">
+      <div aria-label="大船店のスペースの様子 1" class="gallery-item" data-full="/images/figma/detail-ofuna-1.webp"
+        data-gallery-item="">
+        <picture>
+          <source srcset="/images/figma/detail-ofuna-1.webp" type="image/webp" /><img alt="大船店のスペースの様子 1"
+            class="gallery-item__image" decoding="async" height="960" loading="lazy"
+            src="/images/figma/detail-ofuna-1.png" width="1256" />
+        </picture>
+      </div>
+      <div aria-label="大船店のスペースの様子 2" class="gallery-item" data-full="/images/figma/detail-ofuna-2.webp"
+        data-gallery-item="">
+        <picture>
+          <source srcset="/images/figma/detail-ofuna-2.webp" type="image/webp" /><img alt="大船店のスペースの様子 2"
+            class="gallery-item__image" decoding="async" height="468" loading="lazy"
+            src="/images/figma/detail-ofuna-2.png" width="628" />
+        </picture>
+      </div>
+      <div aria-label="大船店のスペースの様子 3" class="gallery-item" data-full="/images/figma/detail-ofuna-3.webp"
+        data-gallery-item="">
+        <picture>
+          <source srcset="/images/figma/detail-ofuna-3.webp" type="image/webp" /><img alt="大船店のスペースの様子 3"
+            class="gallery-item__image" decoding="async" height="468" loading="lazy"
+            src="/images/figma/detail-ofuna-3.png" width="628" />
+        </picture>
+      </div>
+      <div aria-label="大船店のスペースの様子 4" class="gallery-item" data-full="/images/figma/detail-ofuna-4.webp"
+        data-gallery-item="">
+        <picture>
+          <source srcset="/images/figma/detail-ofuna-4.webp" type="image/webp" /><img alt="大船店のスペースの様子 4"
+            class="gallery-item__image" decoding="async" height="468" loading="lazy"
+            src="/images/figma/detail-ofuna-4.png" width="628" />
+        </picture>
+      </div>
+      <div aria-label="大船店のスペースの様子 5" class="gallery-item" data-full="/images/figma/detail-ofuna-5.webp"
+        data-gallery-item="">
+        <picture>
+          <source srcset="/images/figma/detail-ofuna-5.webp" type="image/webp" /><img alt="大船店のスペースの様子 5"
+            class="gallery-item__image" decoding="async" height="468" loading="lazy"
+            src="/images/figma/detail-ofuna-5.png" width="628" />
+        </picture>
+      </div>
+    </div>
+    <div class="review-image-grid">
+      <figure class="review-image-card">
+        <picture>
+          <source srcset="/images/figma/review-ofuna-1.webp" type="image/webp" /><img alt="大船店の口コミ 1" decoding="async"
+            height="389" loading="lazy" src="/images/figma/review-ofuna-1.png" width="1224" />
+        </picture>
+      </figure>
+      <figure class="review-image-card">
+        <picture>
+          <source srcset="/images/figma/review-ofuna-2.webp" type="image/webp" /><img alt="大船店の口コミ 2" decoding="async"
+            height="386" loading="lazy" src="/images/figma/review-ofuna-2.png" width="1316" />
+        </picture>
+      </figure>
+      <figure class="review-image-card">
+        <picture>
+          <source srcset="/images/figma/review-ofuna-3.webp" type="image/webp" /><img alt="大船店の口コミ 3" decoding="async"
+            height="512" loading="lazy" src="/images/figma/review-ofuna-3.png" width="1326" />
+        </picture>
+      </figure>
+      <figure class="review-image-card">
+        <picture>
+          <source srcset="/images/figma/review-ofuna-4.webp" type="image/webp" /><img alt="大船店の口コミ 4" decoding="async"
+            height="506" loading="lazy" src="/images/figma/review-ofuna-4.png" width="1316" />
+        </picture>
+      </figure>
+    </div>
+    <div>
+      <p class="review-note">※レビューはスペースマーケットに投稿された、2026年8月時点のものです。</p>
+    </div>
+    <div class="text-center">
+      <a aria-label="LINEから問い合わせる" class="line-btn" href="https://lin.ee/NxsG2bB" target="_blank"
+        rel="noopener noreferrer">
+        <span class="line-btn__inner">
+          <span class="line-btn__icon">
+            <img src="./images/figma/line-icon.svg" alt="">
+          </span>
+          <span class="line-btn__label">LINEから<br class="sp-only">予約・お問い合わせ</span>
+          <span class="line-btn__arrow">
+            <img src="./images/figma/line-arrow.svg" alt="">
+          </span>
+        </span>
+      </a>
+    </div>
+  </section>
+  <section id="firetv">
+    <div class="container">
+      <div class="section-header"> <span class="eyebrow">FIRE TV</span>
+        <h2>映画もドラマもアニメも<br />大画面で見放題</h2>
+      </div>
+      <div class="firetv-content">
+        <figure class="firetv-logos">
+          <picture>
+            <source srcset="/images/figma/firetv-logos.webp" type="image/webp" /><img
+              alt="対応する動画配信サービス（Netflix・U-NEXT・TVer・Hulu・Prime Videoなど）" decoding="async" height="1274" loading="lazy"
+              src="/images/figma/firetv-logos.png" width="1406" />
+          </picture>
+        </figure>
+        <figure class="firetv-device">
+          <picture>
+            <source srcset="/images/figma/firetv-device.webp" type="image/webp" /><img alt="Fire TV Stick"
+              decoding="async" height="1462" loading="lazy" src="/images/figma/firetv-device.png" width="1045" />
+          </picture>
+        </figure>
+      </div>
+      <p class="firetv-note">
+        ※Fire TVでご利用いただくサービスは、お客様ご自身のアカウントをご利用ください。<br>
+        Prime Videoのみ、スペース専用アカウントでご視聴いただけます。
+      </p>
+    </div>
+  </section>
+  <section id="flow">
+    <div class="container">
+      <div class="section-header"> <span class="eyebrow">STEPS</span>
+        <h2>はじめての方も安心して<br />ご利用いただけます</h2>
+      </div>
+      <div class="steps-flow">
+        <div class="step">
+          <p class="step-label">STEP 01</p>
+          <p class="step-en">RESERVE</p>
+          <p class="step-jp">WEB予約</p>
+          <p class="step-desc">お好きな日時を選んで<br />24時間いつでも予約可能<br /></p>
+        </div>
+        <span aria-hidden="true" class="arrow">
+          <img src="/images/figma/steps-arrow.svg" alt="">
+        </span>
+        <div class="step">
+          <p class="step-label">STEP 02</p>
+          <p class="step-en">ENTER</p>
+          <p class="step-jp">入室</p>
+          <p class="step-desc">予約確定後に入室方法や<br />機材の利用方法をお送りします<br /></p>
+        </div> <span aria-hidden="true" class="arrow">
+          <img src="/images/figma/steps-arrow.svg" alt="">
+        </span>
+        <div class="step">
+          <p class="step-label">STEP 03</p>
+          <p class="step-en">ENJOY</p>
+          <p class="step-jp">自由に過ごす</p>
+          <p class="step-desc">映画・ゲームなど<br />自由にお楽しみください<br /></p>
+        </div> <span aria-hidden="true" class="arrow">
+          <img src="/images/figma/steps-arrow.svg" alt="">
+        </span>
+        <div class="step">
+          <p class="step-label">STEP 04</p>
+          <p class="step-en">CLEANING</p>
+          <p class="step-jp">清掃後退出</p>
+          <p class="step-desc">簡単なセルフクリーニングをして<br />退出をお願いします<br /></p>
+        </div>
+      </div>
+      <p class="rule-list">
+        喫煙・騒音・迷惑行為は禁止です。<br />
+        キャンセル料は予約成立後から発生するため、<br class="sp-only">日程変更は利用2日前12時までにご連絡ください。
+      </p>
+    </div>
+  </section>
+  <div class="section-image">
+    <figure>
+      <picture>
+        <source srcset="/images/figma/divider-photo.webp" type="image/webp" />
+        <img alt="スペースの室内の様子" src="/images/figma/divider-photo.jpg" />
+      </picture>
+    </figure>
+  </div>
+  <section id="voices">
+    <div class="container">
+      <div class="section-header"> <span class="eyebrow">REVIEWS</span>
+        <h2>お客様の声</h2>
+      </div>
+      <div class="review-scores">
+
+        <div class="review-score">
+          <div class="review-store-info">
+            <p class="store">
+              横浜中華街店
+              <span class="count"><strong>196</strong>件</span>
+            </p>
+          </div>
+
+          <p class="score-image">
+            <img src="/images/figma/score-yokohama.png" alt="★4.8">
+          </p>
+        </div>
+
+        <div class="review-score">
+          <div class="review-store-info">
+            <p class="store">
+              大船店
+              <span class="count"><strong>50</strong>件</span>
+            </p>
+          </div>
+
+          <p class="score-image">
+            <img src="/images/figma/score-ofuna.png" alt="★4.7">
+          </p>
+        </div>
+
+      </div>
+
+      <div class="review-image-grid">
+        <figure class="review-image-card">
+          <picture>
+            <source srcset="/images/figma/review-summary-1.webp" type="image/webp" /><img alt="お客様の声 1" decoding="async"
+              height="400" loading="lazy" src="/images/figma/review-summary-1.png" width="1260" />
+          </picture>
+        </figure>
+        <figure class="review-image-card">
+          <picture>
+            <source srcset="/images/figma/review-summary-2.webp" type="image/webp" /><img alt="お客様の声 2" decoding="async"
+              height="400" loading="lazy" src="/images/figma/review-summary-2.png" width="1260" />
+          </picture>
+        </figure>
+        <figure class="review-image-card">
+          <picture>
+            <source srcset="/images/figma/review-summary-3.webp" type="image/webp" /><img alt="お客様の声 3" decoding="async"
+              height="500" loading="lazy" src="/images/figma/review-summary-3.png" width="1260" />
+          </picture>
+        </figure>
+        <figure class="review-image-card">
+          <picture>
+            <source srcset="/images/figma/review-ofuna-4.webp" type="image/webp" /><img alt="お客様の声 4" decoding="async"
+              height="506" loading="lazy" src="/images/figma/review-ofuna-4.png" width="1316" />
+          </picture>
+        </figure>
+        <figure class="review-image-card">
+          <picture>
+            <source srcset="/images/figma/review-summary-5.webp" type="image/webp" /><img alt="お客様の声 5" decoding="async"
+              height="400" loading="lazy" src="/images/figma/review-summary-5.png" width="1260" />
+          </picture>
+        </figure>
+        <figure class="review-image-card">
+          <picture>
+            <source srcset="/images/figma/review-summary-6.webp" type="image/webp" /><img alt="お客様の声 6" decoding="async"
+              height="402" loading="lazy" src="/images/figma/review-summary-6.png" width="1260" />
+          </picture>
+        </figure>
+      </div>
+      <p class="review-note">※レビューはスペースマーケットに投稿された、2026年8月時点のものです。</p>
+    </div>
+  </section>
+  <section id="faq">
+    <div class="container">
+      <div class="section-header"> <span class="eyebrow">FAQ</span>
+        <h2>よくある質問</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>
+            <span class="q-mark">Q.</span>
+            <span class="q-text">ゴミは捨てられますか？</span>
+          </summary>
+          <div class="answer">
+            <span class="a-mark">A.</span>
+            <p>基本的にはお持ち帰りをお願いしていますが、有料のゴミ回収オプション（¥550）もご用意しています。</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary><span class="q-mark">Q.</span>
+            <span class="q-text">商用利用・撮影は可能ですか？</span>
+          </summary>
+          <div class="answer">
+            <span class="a-mark">A.</span>
+            <p>商用撮影オプション（¥1,650）にご加入いただければ可能です。事前にLINEでご相談ください。</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            <span class="q-mark">Q.</span>
+            <span class="q-text">駐輪場はありますか？</span>
+          </summary>
+          <div class="answer">
+            <span class="a-mark">A.</span>
+            <p>店舗専用の駐輪場はございません。近隣のコインパーキング・駐輪場をご利用ください。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+  <section id="access">
+    <div class="container">
+      <div class="access-block" data-location="yokohama">
+        <p class="access-eyebrow">YOKOHAMA</p>
+        <h3>横浜中華街店</h3>
+        <div class="access-grid">
+          <div class="map-embed"> <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=神奈川県横浜市中区石川町1丁目&amp;output=embed" title="横浜中華街店の地図"></iframe> </div>
+        </div>
+        <div class="access-info">
+          <dl>
+            <dt>住所</dt>
+            <dd>
+              〒231-0868<br />
+              神奈川県横浜市中区石川町1丁目
+            </dd>
+
+            <dt>最寄駅</dt>
+            <dd>
+              <ul class="access-list">
+                <li>JR根岸線 石川町駅 徒歩4分</li>
+                <li>みなとみらい線 元町・中華街駅 徒歩7分</li>
+                <li>JR根岸線 関内駅 徒歩17分</li>
+                <li>みなとみらい線 日本大通り駅 徒歩18分</li>
+                <li>ブルーライン 伊勢佐木長者町駅 徒歩20分</li>
+                <li>JR東海道本線(東京〜熱海) 横浜駅 バス15分</li>
+              </ul>
+
+              <p class="access-note">
+                石川町駅の元町口改札を出ていただきます。詳細な住所やその後の道順は、ご予約後にメッセージにてお送りする資料に記載しております。
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="access-block" data-location="ofuna">
+        <p class="access-eyebrow">OFUNA</p>
+        <h3>大船店</h3>
+        <div class="access-grid">
+          <div class="map-embed"> <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=神奈川県鎌倉市大船1丁目13-7&amp;output=embed" title="大船店の地図"></iframe> </div>
+        </div>
+        <div class="access-info">
+          <dl>
+            <dt>住所</dt>
+            <dd>
+              〒247-0056<br />
+              神奈川県鎌倉市大船1丁目13-7 <br class="sp-only">ステラビル5階
+              <span>&emsp;※エレベーターなし</span>
+            </dd>
+
+            <dt>最寄駅</dt>
+            <dd>
+              <ul class="access-list">
+                <li>湘南モノレール 大船駅 徒歩4分</li>
+                <li>湘南モノレール 富士見町駅 徒歩11分</li>
+              </ul>
+
+              <p class="access-note">
+                大船駅の南改札を東口側に出ていただきます。詳細な住所やその後の道順は、ご予約後にメッセージにてお送りする資料に記載しております。
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="final-cta" id="booking">
+    <div class="container">
+      <div class="cta-columns">
+        <div class="cta-card">
+          <div class="cta-content">
+            <span class="eyebrow">CONTACT</span>
+            <h2>お問い合わせ</h2>
+            <p>
+              空き状況の確認・ご予約は<br>LINEのメニューから。<br>お気軽にお問い合わせください
+            </p>
+          </div>
+        </div>
+        <div class="btn-container">
+          <a aria-label="LINEから問い合わせる" class="line-btn" href="https://lin.ee/NxsG2bB" target="_blank"
+            rel="noopener noreferrer">
+            <span class="line-btn__inner">
+              <span class="line-btn__icon">
+                <img src="./images/figma/line-icon.svg" alt="">
+              </span>
+              <span class="line-btn__label">LINEから<br class="sp-only">予約・お問い合わせ</span>
+              <span class="line-btn__arrow">
+                <img src="./images/figma/line-arrow.svg" alt=""></span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top"> <a aria-label="Smart ホームシアター ホーム" class="brand" href="/">
+          <picture>
+            <source srcset="/images/brand/logo.webp" type="image/webp" /><img alt="Smart Home Theater ロゴ"
+              class="brand-mark" decoding="async" height="44" src="/images/brand/logo.png" width="44" />
+          </picture>
+        </a> </div>
+      <div class="copyright">© Smart ホームシアター</div>
+    </div>
+  </footer>
 </BaseLayout>
