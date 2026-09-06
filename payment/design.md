@@ -120,12 +120,18 @@ GET /success?session_id=...     … Worker が Stripe API で再検証 → PIN �
 | 項目 | 方式 |
 |------|------|
 | レンタル料金（Prime Video 実費） | 顧客が金額を入力 |
-| 有料オプション | Stripe Product / Price として事前登録 |
+| 有料オプション | `src/options.ts` のカタログで定義 |
 
-Worker が `line_items` を組み立てる。
+Worker が `line_items` を組み立てる。レンタル料金・オプションとも `price_data` で
+`unit_amount` と `product_data.name` を都度指定する。
 
-- レンタル料金: `price_data` に `unit_amount` を動的指定
-- オプション: 登録済みの `price` ID を指定
+Stripe ダッシュボードでの Product / Price の事前登録は行わない。理由:
+
+- Product / Price はサンドボックスと本番モードで別物になり、Price ID を二重管理する必要が出る
+- オプションの名称・価格はフォームの表示にも使うため、`options.ts` を単一の情報源にできる
+
+引き換えに、Stripe ダッシュボードの商品別売上集計は使えなくなる（決済ごとに
+アドホックな Product が作られるため）。この取引量では実害がないと判断する。
 
 実装上の注意:
 
