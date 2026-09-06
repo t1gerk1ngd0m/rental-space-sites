@@ -6,6 +6,9 @@
   "routes": [
     { "pattern": "payment.smart-hometheater.com", "custom_domain": true }
   ],
+  "kv_namespaces": [
+    { "binding": "PAYMENTS", "id": "b2c6e5153d684a2086625821d904c709" }
+  ],
   "observability": {
     "enabled": true
   }

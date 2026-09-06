@@ -57,6 +57,11 @@ app.get('/cancel', (c) =>
   ),
 );
 
+// Stripe の Webhook エンドポイント登録用のスタブ。
+// 署名検証（constructEventAsync）と履行処理は決済実装フェーズで差し替える。
+// TODO: 署名検証を入れるまでは受信内容を一切信用しない。
+app.post('/webhooks/stripe', (c) => c.text('ok', 200));
+
 app.notFound((c) =>
   c.html(
     <Layout title="ページが見つかりません">
